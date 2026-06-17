@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --font-space: "Space Grotesk", sans-serif;
+  --color-brand: #06B6D4;
+  --color-text-main: #E2E8F0;
+}
+
+:root {
+  --color-brand: #06B6D4;
+  --color-text-main: #E2E8F0;
+  --font-space: "Space Grotesk", sans-serif;
+  
+  font-family: var(--font-space);
+  color: var(--color-text-main);
+  background-color: #050816;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #050816;
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Global Interactive cursor */
+button, 
+a, 
+.cursor-pointer {
+  cursor: pointer !important;
+}
