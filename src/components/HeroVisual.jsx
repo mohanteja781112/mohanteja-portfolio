@@ -39,22 +39,22 @@ const HeroVisual = () => {
       onMouseLeave={handleMouseLeave}
     >
       <style>{`
-        @keyframes orbit {
+        @keyframes hero-orbit {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
-        @keyframes orbitReverse {
+        @keyframes hero-orbit-reverse {
           0% { transform: rotate(360deg); }
           100% { transform: rotate(0deg); }
         }
-        .orbit-container {
-          animation: orbit 40s linear infinite;
+        .hero-orbit-container {
+          animation: hero-orbit 40s linear infinite;
         }
-        .orbit-item {
-          animation: orbitReverse 40s linear infinite;
+        .hero-orbit-item {
+          animation: hero-orbit-reverse 40s linear infinite;
         }
-        .orbit-container:hover,
-        .orbit-container:hover .orbit-item {
+        .hero-orbit-container:hover,
+        .hero-orbit-container:hover .hero-orbit-item {
           animation-play-state: paused;
         }
         @keyframes shimmer {
@@ -101,7 +101,7 @@ const HeroVisual = () => {
         </div>
 
         {/* Orbiting Project Cards */}
-        <div className="orbit-container absolute w-[420px] h-[420px] rounded-full border border-white/10 z-30 pointer-events-none">
+        <div className="hero-orbit-container absolute w-[420px] h-[420px] rounded-full border border-white/10 z-30 pointer-events-none">
           {PROJECTS.map((project, i) => {
             const angle = (i * 360) / PROJECTS.length;
             const radius = 210; // Half of 420
@@ -140,7 +140,7 @@ const HeroVisual = () => {
                     transform: "translate(-50%, -50%)"
                   }}
                 >
-                <div className="orbit-item">
+                <div className="hero-orbit-item">
                   <div className="group relative flex items-center gap-3 p-3 rounded-2xl border border-white/10 bg-[#050816]/80 backdrop-blur-xl shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:bg-white/10 hover:border-[#06B6D4]/50 transition-all duration-300 w-48 hover:w-56 overflow-hidden cursor-pointer">
                     <div className="absolute -inset-4 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]" />
                     
@@ -164,7 +164,7 @@ const HeroVisual = () => {
         </div>
         
         {/* Decorative inner orbit */}
-        <div className="orbit-item absolute w-[300px] h-[300px] rounded-full border border-dashed border-[#06B6D4]/30 pointer-events-none" />
+        <div className="hero-orbit-item absolute w-[300px] h-[300px] rounded-full border border-dashed border-[#06B6D4]/30 pointer-events-none" />
       </motion.div>
     </div>
   );

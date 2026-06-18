@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 import BackgroundEffects from './BackgroundEffects';
 
 const AnimatedCounter = ({ value, duration = 2, suffix = "" }) => {
@@ -229,6 +230,18 @@ const About = () => {
 
         </div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        onClick={() => document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' })}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 0.7, y: [0, 8, 0] }}
+        transition={{ initial: { duration: 0.8, delay: 1.5 }, y: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
+        whileHover={{ opacity: 1, scale: 1.1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
+      >
+        <ChevronDown size={32} />
+      </motion.div>
     </section>
   );
 };

@@ -3,7 +3,7 @@ import { Download, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
-  const menuItems = ['About', 'Skills', 'Projects', 'Achievements'];
+  const menuItems = ['Home', 'About', 'Skills', 'Projects', 'Achievements'];
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -39,8 +39,8 @@ const Navbar = () => {
     <nav 
       className={`sticky top-0 z-50 w-full flex items-center justify-between transition-all duration-300 ${
         isScrolled 
-          ? 'py-3 bg-[#050816]/90 backdrop-blur-[20px] shadow-[0_4px_30px_rgba(6,182,212,0.1)] border-b border-[#06B6D4]/20' 
-          : 'py-5 bg-[#050816]/75 backdrop-blur-[16px] border-b border-[#06B6D4]/12'
+          ? 'py-4 bg-[#050816]/90 backdrop-blur-[20px] shadow-[0_4px_30px_rgba(6,182,212,0.1)] border-b border-[#06B6D4]/20' 
+          : 'py-4 bg-[#050816]/75 backdrop-blur-[16px] border-b border-[#06B6D4]/12'
       }`}
     >
       {/* Subtle floating glow particles behind navbar */}
@@ -82,9 +82,6 @@ const Navbar = () => {
                 }`}></span>
                 
                 {/* Small glowing indicator beneath active section */}
-                {isActive && (
-                  <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#06B6D4] shadow-[0_0_10px_rgba(6,182,212,1)]"></span>
-                )}
               </span>
             );
           })}

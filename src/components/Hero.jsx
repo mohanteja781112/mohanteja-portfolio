@@ -72,7 +72,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-80px)] bg-[#050816] flex items-center overflow-hidden">
+    <section id="home" className="relative w-full min-h-[calc(100vh-80px)] bg-[#050816] flex items-center overflow-hidden">
       <BackgroundEffects />
 
       {/* Global Mouse Follow Glow */}
@@ -108,7 +108,7 @@ const Hero = () => {
               transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
               className="relative inline-block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] via-[#06B6D4] to-[#8B5CF6] drop-shadow-[0_0_15px_rgba(139,92,246,0.3)] bg-[length:200%_auto]"
             >
-              Mohan Teja
+              Mohan Teja Doddi
             </motion.span>
           </motion.h1>
 
