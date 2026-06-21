@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { GraduationCap, HeartPulse, Shirt } from 'lucide-react';
+import { GraduationCap, HeartPulse, Shirt, ExternalLink } from 'lucide-react';
 
 const HeroVisual = () => {
   const mouseX = useMotionValue(0);
@@ -27,14 +27,14 @@ const HeroVisual = () => {
   };
 
   const PROJECTS = [
-    { title: "Siddhartha EduHub", desc: "School ERP", icon: GraduationCap, color: "#8B5CF6", stats: "10k+ Users" },
-    { title: "NearMeds", desc: "Emergency Health", icon: HeartPulse, color: "#06B6D4", stats: "24/7 Access" },
-    { title: "TrueFit", desc: "AI Try-On", icon: Shirt, color: "#A855F7", stats: "99% Accuracy" }
+    { title: "Siddhartha EduHub", desc: "School ERP", icon: GraduationCap, color: "#FFD700", stats: "10k+ Users", url: "https://siddhartha-eduhub.vercel.app/" },
+    { title: "NearMeds", desc: "Emergency Health", icon: HeartPulse, color: "#06B6D4", stats: "24/7 Access", url: "https://near-meds.vercel.app/" },
+    { title: "Apparel Fit", desc: "AI Try-On", icon: Shirt, color: "#8B5CF6", stats: "99% Accuracy", url: "#" }
   ];
 
   return (
     <div 
-      className="relative w-full max-w-[500px] aspect-square flex items-center justify-center scale-[0.55] sm:scale-75 md:scale-90 lg:scale-100 transition-transform duration-500 origin-center"
+      className="relative w-full max-w-[500px] aspect-square flex items-center justify-center scale-[0.45] sm:scale-75 md:scale-90 lg:scale-100 transition-transform duration-500 origin-center mt-[-40px] sm:mt-0"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -86,9 +86,10 @@ const HeroVisual = () => {
             
             <div className="absolute inset-[-20px] rounded-full border border-white/5 bg-white/5 backdrop-blur-sm pointer-events-none" />
             <div className="absolute inset-[-40px] rounded-full border border-[#8B5CF6]/20 bg-[#8B5CF6]/5 backdrop-blur-md pointer-events-none" />
-            <div className="absolute inset-[-4px] rounded-full bg-gradient-to-tr from-[#8B5CF6] to-[#06B6D4] opacity-50 blur-[8px] pointer-events-none" />
+            {/* The Thick Soft Glow */}
+            <div className="absolute inset-[-4px] rounded-full bg-gradient-to-tr from-[#06B6D4] to-[#8B5CF6] opacity-80 blur-[12px] pointer-events-none" />
             
-            <div className="relative z-10 w-40 h-40 rounded-full bg-gradient-to-tr from-[#8B5CF6] to-[#06B6D4] p-[2px]">
+            <div className="relative z-10 w-40 h-40 rounded-full shadow-[0_0_30px_rgba(6,182,212,0.5)]">
               <div className="w-full h-full rounded-full overflow-hidden bg-[#050816]">
                 <img 
                   src="/profilephoto.jpg" 
@@ -141,7 +142,12 @@ const HeroVisual = () => {
                   }}
                 >
                 <div className="hero-orbit-item">
-                  <div className="group relative flex items-center gap-3 p-3 rounded-2xl border border-white/10 bg-[#050816]/80 backdrop-blur-xl shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:bg-white/10 hover:border-[#06B6D4]/50 transition-all duration-300 w-48 hover:w-56 overflow-hidden cursor-pointer">
+                  <a 
+                    href={project.url}
+                    target={project.url !== "#" ? "_blank" : undefined}
+                    rel="noopener noreferrer"
+                    className="group relative flex items-center gap-3 p-3 rounded-2xl border border-white/10 bg-[#050816]/80 backdrop-blur-xl shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:bg-white/10 hover:border-[#06B6D4]/50 transition-all duration-300 w-48 hover:w-56 overflow-hidden cursor-pointer block"
+                  >
                     <div className="absolute -inset-4 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]" />
                     
                     <div className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${project.color}20` }}>
@@ -151,11 +157,12 @@ const HeroVisual = () => {
                     <div className="flex flex-col flex-1 overflow-hidden">
                       <span className="text-white text-xs font-semibold truncate group-hover:text-clip">{project.title}</span>
                       <span className="text-slate-400 text-[10px] truncate">{project.desc}</span>
-                      <span className="text-[10px] font-medium mt-0.5 opacity-0 h-0 group-hover:opacity-100 group-hover:h-auto transition-all duration-300" style={{ color: project.color }}>
-                        {project.stats}
-                      </span>
+                      <div className="flex items-center gap-1 font-medium mt-0.5 opacity-0 h-0 group-hover:opacity-100 group-hover:h-auto transition-all duration-300" style={{ color: project.color }}>
+                        <span className="text-[10px] font-bold">Click to open</span>
+                        <ExternalLink className="w-2.5 h-2.5" />
+                      </div>
                     </div>
-                  </div>
+                  </a>
                 </div>
               </div>
               </React.Fragment>

@@ -72,7 +72,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative w-full min-h-[calc(100vh-80px)] bg-[#050816] flex items-center overflow-hidden">
+    <section id="home" className="relative w-full min-h-screen pt-[80px] bg-[#050816] flex items-center overflow-hidden">
       <BackgroundEffects />
 
       {/* Global Mouse Follow Glow */}
@@ -86,14 +86,14 @@ const Hero = () => {
 
 
 
-      <div className="container relative z-10 mx-auto px-6 sm:px-8 pt-8 sm:pt-16 pb-28 lg:pt-0 lg:pb-0 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="container relative z-10 mx-auto px-6 sm:px-8 pt-8 sm:pt-16 pb-12 sm:pb-28 lg:pt-0 lg:pb-0 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* Left Side: Text Content */}
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="relative z-10 lg:pr-10">
           
           {/* Left section decorative elements (Particles removed per request) */}
 
           {/* Animated badge above name */}
-          <motion.div variants={itemVariants} className="mb-6 flex flex-wrap gap-2 text-[10px] sm:text-xs font-bold tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-slate-400 to-slate-200 uppercase">
+          <motion.div variants={itemVariants} className="mb-4 sm:mb-6 flex flex-wrap justify-center lg:justify-start gap-1.5 sm:gap-2 text-[8px] sm:text-xs font-bold tracking-[0.1em] sm:tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-slate-400 to-slate-200 uppercase">
             <span>FULL STACK DEVELOPER</span>
             <span className="text-[#8B5CF6]">|</span>
             <span>AI ENGINEER</span>
@@ -101,7 +101,7 @@ const Hero = () => {
             <span>PROBLEM SOLVER</span>
           </motion.div>
 
-          <motion.h1 variants={itemVariants} className="text-white text-[clamp(2.5rem,6vw,4.5rem)] font-bold tracking-tight mb-4 relative leading-tight">
+          <motion.h1 variants={itemVariants} className="text-white text-[clamp(2.2rem,6vw,4.5rem)] font-bold tracking-tight mb-2 sm:mb-4 relative leading-[1.1] sm:leading-tight text-center lg:text-left">
             <span className="opacity-90">Hi, I'm</span> <br className="hidden md:block" />
             <motion.span 
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
@@ -112,9 +112,9 @@ const Hero = () => {
             </motion.span>
           </motion.h1>
 
-          <motion.div variants={itemVariants} className="h-10 mb-8 flex items-center text-[clamp(1.25rem,4vw,1.875rem)] font-medium">
+          <motion.div variants={itemVariants} className="h-8 sm:h-10 mb-6 sm:mb-8 flex items-center justify-center lg:justify-start text-[clamp(1rem,4vw,1.875rem)] font-medium">
             {/* Fixed-width container to prevent layout shifts */}
-            <div className="min-w-[260px] sm:min-w-[320px] lg:min-w-[380px] flex items-center">
+            <div className="min-w-[200px] sm:min-w-[320px] lg:min-w-[380px] flex items-center justify-center lg:justify-start">
               <span className="text-[#06B6D4] drop-shadow-[0_0_10px_rgba(6,182,212,0.4)]">
                 {text}
               </span>
@@ -127,31 +127,31 @@ const Hero = () => {
           </motion.div>
 
           {/* Minimal Trust Indicators */}
-          <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-3 sm:gap-4 mb-10 text-xs sm:text-sm font-medium text-white/60">
-            <span className="flex items-center gap-1.5 hover:text-[#06B6D4] hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-all duration-300 cursor-default">
-              <span>🏆</span> 2 Hackathon Awards
+          <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-4 mb-6 sm:mb-10 text-[11px] sm:text-sm font-medium text-white/60">
+            <span className="flex items-center gap-1 sm:gap-1.5 hover:text-[#06B6D4] hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-all duration-300 cursor-default">
+              <span className="text-[14px] sm:text-base">🏆</span> 2 Hackathon Awards
             </span>
             <span className="text-white/20 hidden sm:block">•</span>
-            <span className="flex items-center gap-1.5 hover:text-[#06B6D4] hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-all duration-300 cursor-default">
-              <span>🚀</span> 3 Featured Projects
+            <span className="flex items-center gap-1 sm:gap-1.5 hover:text-[#06B6D4] hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-all duration-300 cursor-default">
+              <span className="text-[14px] sm:text-base">🚀</span> 3 Featured Projects
             </span>
             <span className="text-white/20 hidden sm:block">•</span>
-            <span className="flex items-center gap-1.5 hover:text-[#06B6D4] hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-all duration-300 cursor-default">
-              <span>💻</span> Full Stack Developer
+            <span className="flex items-center gap-1 sm:gap-1.5 hover:text-[#06B6D4] hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-all duration-300 cursor-default">
+              <span className="text-[14px] sm:text-base">💻</span> Full Stack Developer
             </span>
           </motion.div>
 
           {/* Floating status indicator */}
-          <motion.div variants={itemVariants} className="flex items-center gap-2 mb-6 w-fit px-4 py-2 rounded-full border border-[#06B6D4]/30 bg-[#06B6D4]/10 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.15)]">
-            <span className="relative flex h-2.5 w-2.5">
+          <motion.div variants={itemVariants} className="flex items-center justify-center mx-auto lg:mx-0 gap-2 mb-4 sm:mb-6 w-fit px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#06B6D4]/30 bg-[#06B6D4]/10 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+            <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#08CB00] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#08CB00] shadow-[0_0_8px_#08CB00]"></span>
+              <span className="relative inline-flex rounded-full h-full w-full bg-[#08CB00] shadow-[0_0_8px_#08CB00]"></span>
             </span>
-            <span className="text-xs sm:text-sm font-medium text-[#06B6D4] tracking-wide">Available for Opportunities</span>
+            <span className="text-[11px] sm:text-sm font-medium text-[#06B6D4] tracking-wide">Available for Opportunities</span>
           </motion.div>
 
           {/* CTA Redesign */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 sm:gap-5 w-full sm:w-auto mt-4">
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-5 w-full sm:w-auto mt-2 sm:mt-4">
             {/* Primary Button */}
             <a 
               href="https://github.com/mohanteja781112" 
@@ -160,9 +160,9 @@ const Hero = () => {
               className="relative group overflow-hidden rounded-xl p-[1px] w-full sm:w-auto cursor-pointer block"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] rounded-xl opacity-70 group-hover:opacity-100 group-hover:blur-md transition-all duration-300 animate-pulse"></span>
-              <div className="relative flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 bg-[#050816] rounded-xl group-hover:bg-opacity-0 transition-all duration-300 w-full h-full">
-                <span className="text-white font-semibold relative z-10 transition-colors">View Github</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#06B6D4] group-hover:text-white transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+              <div className="relative flex items-center justify-center gap-2 px-5 sm:px-8 py-2.5 sm:py-3.5 bg-[#050816] rounded-xl group-hover:bg-opacity-0 transition-all duration-300 w-full h-full">
+                <span className="text-[13px] sm:text-base text-white font-semibold relative z-10 transition-colors">View Github</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] text-[#06B6D4] group-hover:text-white transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
                   <path d="M9 18c-4.51 2-5-2-7-2"/>
                 </svg>
@@ -170,9 +170,12 @@ const Hero = () => {
             </a>
             
             {/* Secondary Button */}
-            <button className="flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 bg-white/5 backdrop-blur-md text-slate-200 font-semibold rounded-xl border border-white/10 hover:border-[#06B6D4] hover:text-[#06B6D4] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-1 active:scale-95 transition-all duration-300 group w-full sm:w-auto">
+            <button 
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="flex items-center justify-center gap-2 px-5 sm:px-8 py-2.5 sm:py-3.5 bg-white/5 backdrop-blur-md text-slate-200 text-[13px] sm:text-base font-semibold rounded-xl border border-white/10 hover:border-[#06B6D4] hover:text-[#06B6D4] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-1 active:scale-95 transition-all duration-300 group w-full sm:w-auto"
+            >
               <span>Contact Me</span>
-              <Phone size={18} className="transition-transform duration-300 group-hover:rotate-12 group-hover:text-[#06B6D4]" />
+              <Phone className="w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] transition-transform duration-300 group-hover:rotate-12 group-hover:text-[#06B6D4]" />
             </button>
           </motion.div>
         </motion.div>
@@ -195,7 +198,7 @@ const Hero = () => {
         animate={{ opacity: 0.7, y: [0, 8, 0] }}
         transition={{ initial: { duration: 0.8, delay: 1.5 }, y: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
         whileHover={{ opacity: 1, scale: 1.1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
+        className="absolute bottom-3 sm:bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
       >
         <ChevronDown size={32} />
       </motion.div>

@@ -9,8 +9,8 @@ const BackgroundEffects = () => {
     const ctx = canvas.getContext('2d');
     let animationFrameId;
     let particles = [];
-    let numParticles = window.innerWidth < 768 ? 30 : 70;
-    let maxDist = window.innerWidth < 768 ? 100 : 150;
+    let numParticles = window.innerWidth < 768 ? 0 : 70; // Disabled on mobile to fix lag
+    let maxDist = window.innerWidth < 768 ? 0 : 150;
     
     class Particle {
       constructor() {
@@ -39,10 +39,11 @@ const BackgroundEffects = () => {
     }
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      numParticles = window.innerWidth < 768 ? 30 : 70;
-      maxDist = window.innerWidth < 768 ? 100 : 150;
+      const parent = canvas.parentElement;
+      canvas.width = parent.offsetWidth;
+      canvas.height = parent.offsetHeight;
+      numParticles = window.innerWidth < 768 ? 0 : 70;
+      maxDist = window.innerWidth < 768 ? 0 : 150;
       
       if (particles.length !== numParticles) {
         particles = [];
@@ -52,7 +53,14 @@ const BackgroundEffects = () => {
       }
     };
     
-    window.addEventListener('resize', resize);
+    const resizeObserver = new ResizeObserver(() => {
+      resize();
+    });
+    
+    if (canvas.parentElement) {
+      resizeObserver.observe(canvas.parentElement);
+    }
+    
     resize();
 
     const drawLines = () => {
@@ -90,7 +98,7 @@ const BackgroundEffects = () => {
     animate();
 
     return () => {
-      window.removeEventListener('resize', resize);
+      resizeObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -98,10 +106,10 @@ const BackgroundEffects = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <div className="absolute inset-0 bg-[#050816]" />
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#8B5CF6]/15 blur-[120px] rounded-full" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#06B6D4]/10 blur-[120px] rounded-full" />
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#8B5CF6]/15 blur-[60px] md:blur-[120px] rounded-full" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#06B6D4]/10 blur-[60px] md:blur-[120px] rounded-full" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-      <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-40 pointer-events-none" />
+      <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-40 pointer-events-none hidden md:block" />
     </div>
   );
 }

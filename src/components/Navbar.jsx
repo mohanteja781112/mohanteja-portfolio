@@ -1,22 +1,73 @@
 import React, { useState, useEffect } from 'react';
-import { Download, Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { FileText, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 
 const Navbar = () => {
   const menuItems = ['Home', 'About', 'Skills', 'Projects', 'Achievements'];
   const [isScrolled, setIsScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // Shrink and darken on scroll
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+  const { scrollY } = useScroll();
+  const lastDirectionChangeY = React.useRef(0);
+  const lastScrollDirection = React.useRef('up');
+  const isScrollingRef = React.useRef(false);
+  const scrollTimeoutRef = React.useRef(null);
 
+  const handleNavClick = (item) => {
+    setIsMobileMenuOpen(false);
+    setActiveSection(item.toLowerCase()); // Instantly highlight target
+    isScrollingRef.current = true;
+    
+    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    
+    if (item.toLowerCase() === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Re-enable scroll spy after scrolling finishes
+    scrollTimeoutRef.current = setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 1000);
+  };
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() || 0;
+    
+    const currentDirection = latest > previous ? 'down' : 'up';
+    
+    if (currentDirection !== lastScrollDirection.current) {
+      lastDirectionChangeY.current = latest;
+      lastScrollDirection.current = currentDirection;
+    }
+
+    if (latest < 100) {
+      setHidden(false);
+      setIsScrolled(latest > 50);
+      return;
+    } 
+    
+    setIsScrolled(true);
+
+    const scrollDelta = Math.abs(latest - lastDirectionChangeY.current);
+
+    // 30px threshold for showing/hiding to prevent trackpad micro-jitters
+    if (scrollDelta > 30) {
+      if (currentDirection === 'down' && latest > 150) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+    }
+  });
+
+  useEffect(() => {
+    const handleScrollSpy = () => {
+      if (isScrollingRef.current) return; // Skip if navigating via click
+      
       // Scroll Spy logic
       const sections = menuItems.map(item => document.getElementById(item.toLowerCase()));
       let current = '';
@@ -31,17 +82,23 @@ const Navbar = () => {
       setActiveSection(current);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScrollSpy, { passive: true });
+    return () => window.removeEventListener('scroll', handleScrollSpy);
   }, [menuItems]);
 
   return (
-    <nav 
-      className={`sticky top-0 z-50 w-full flex items-center justify-between transition-all duration-300 ${
+    <motion.nav 
+      variants={{
+        visible: { y: 0, opacity: 1 },
+        hidden: { y: "-100%", opacity: 0.98 }
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between ${
         isScrolled 
-          ? 'py-4 bg-[#050816]/90 backdrop-blur-[20px] shadow-[0_4px_30px_rgba(6,182,212,0.1)] border-b border-[#06B6D4]/20' 
-          : 'py-4 bg-[#050816]/75 backdrop-blur-[16px] border-b border-[#06B6D4]/12'
-      }`}
+          ? 'py-4 bg-[#050A1E]/75 backdrop-blur-[20px] shadow-[0_4px_30px_rgba(6,182,212,0.15)] border-b border-[#06B6D4]/20' 
+          : 'py-5 bg-[#050816]/50 backdrop-blur-[12px] border-b border-transparent'
+      } transition-colors duration-300`}
     >
       {/* Subtle floating glow particles behind navbar */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -65,12 +122,7 @@ const Navbar = () => {
             return (
               <span
                 key={item}
-                onClick={() => {
-                  const element = document.getElementById(item.toLowerCase());
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                onClick={() => handleNavClick(item)}
                 className={`relative text-sm font-medium tracking-wide cursor-pointer transition-colors duration-300 hover:text-[#06B6D4] group ${
                   isActive ? 'text-[#06B6D4]' : 'text-white/80'
                 }`}
@@ -87,10 +139,10 @@ const Navbar = () => {
           })}
           
           {/* Resume Button */}
-          <button className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] text-white font-medium rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.6)] hover:-translate-y-1 hover:scale-105 active:scale-95 transition-all duration-300 group">
-            <Download size={16} className="transition-transform duration-300 group-hover:-translate-y-0.5" />
+          <a href="/Mohan_Teja_Doddi_Resume (Diamond).pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] text-white font-medium rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.6)] hover:-translate-y-1 hover:scale-105 active:scale-95 transition-all duration-300 group">
+            <FileText size={16} className="transition-transform duration-300 group-hover:-translate-y-0.5" />
             <span>Resume</span>
-          </button>
+          </a>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -121,10 +173,7 @@ const Navbar = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
-                  }}
+                  onClick={() => handleNavClick(item)}
                   className={`text-lg font-medium tracking-wide cursor-pointer transition-colors duration-300 ${
                     activeSection === item.toLowerCase() ? 'text-[#06B6D4]' : 'text-white/80 hover:text-white'
                   }`}
@@ -139,16 +188,16 @@ const Navbar = () => {
                 transition={{ delay: menuItems.length * 0.1 }}
                 className="pt-4 mt-2 border-t border-white/10"
               >
-                <button className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] text-white font-medium rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.3)] active:scale-95 transition-all duration-300">
-                  <Download size={20} />
+                <a href="/Mohan_Teja_Doddi_Resume (Diamond).pdf" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] text-white font-medium rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.3)] active:scale-95 transition-all duration-300">
+                  <FileText size={20} />
                   <span>Resume</span>
-                </button>
+                </a>
               </motion.div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 
