@@ -210,7 +210,7 @@ const Projects = () => {
           </div>
 
           {/* RIGHT SIDE: Project Showcase Panel (Image + Terminal Hybrid) */}
-          <div className="relative w-full rounded-3xl bg-[#0a0f1c]/40 border border-white/[0.08] backdrop-blur-2xl sm:backdrop-blur-3xl p-3 sm:p-5 lg:p-8 overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.6)] flex flex-col ring-1 ring-white/5 h-auto lg:h-[800px]">
+          <div className="relative w-full rounded-3xl bg-[#0a0f1c]/40 border border-white/[0.08] backdrop-blur-sm lg:backdrop-blur-3xl p-3 sm:p-5 lg:p-8 overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.6)] flex flex-col ring-1 ring-white/5 h-auto lg:h-[800px]">
             {/* Ambient Background Glow matching active project */}
             <div className={`absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl ${activeProject.accent} opacity-15 blur-[60px] sm:blur-[120px] rounded-full pointer-events-none transition-all duration-1000`}></div>
 
@@ -270,7 +270,7 @@ const Projects = () => {
                 </motion.a>
 
                 {/* Bottom Area: Premium Developer Console (~60-65% visual weight total) */}
-                <div className="flex-1 lg:flex-[6] flex flex-col rounded-2xl overflow-hidden border border-white/5 bg-white/[0.02] shadow-2xl backdrop-blur-3xl relative ring-1 ring-white/10">
+                <div className="flex-1 lg:flex-[6] flex flex-col rounded-2xl overflow-hidden border border-white/5 bg-white/[0.02] shadow-2xl backdrop-blur-sm lg:backdrop-blur-3xl relative ring-1 ring-white/10">
                   <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
                   
                   {/* Console Body */}

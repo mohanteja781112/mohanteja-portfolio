@@ -160,7 +160,7 @@ const Skills = () => {
             viewport={{ once: true }}
             className="flex flex-col justify-center w-full max-w-2xl mx-auto lg:mx-0 mt-0 sm:mt-8 lg:mt-0"
           >
-            <div className="w-full bg-[#050816]/90 rounded-2xl border border-[#06B6D4]/20 shadow-[0_0_50px_rgba(6,182,212,0.1)] backdrop-blur-2xl overflow-hidden relative">
+            <div className="w-full bg-[#050816]/90 rounded-2xl border border-[#06B6D4]/20 shadow-[0_0_50px_rgba(6,182,212,0.1)] backdrop-blur-sm lg:backdrop-blur-2xl overflow-hidden relative">
               
               {/* Terminal Header */}
               <div className="flex items-center justify-between px-3 py-2.5 sm:px-5 sm:py-3.5 border-b border-[#06B6D4]/20 bg-[#06B6D4]/5">

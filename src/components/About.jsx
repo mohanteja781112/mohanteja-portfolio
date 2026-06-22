@@ -163,7 +163,7 @@ const IdentityCard = () => {
       initial={{ opacity: 0, x: -30 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
-      className="relative w-full rounded-3xl overflow-hidden bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 backdrop-blur-2xl p-5 sm:p-8 hover:border-[#06B6D4]/40 transition-colors duration-500 group shadow-[0_0_40px_rgba(6,182,212,0.05)]"
+      className="relative w-full rounded-3xl overflow-hidden bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 backdrop-blur-sm lg:backdrop-blur-2xl p-5 sm:p-8 hover:border-[#06B6D4]/40 transition-colors duration-500 group shadow-[0_0_40px_rgba(6,182,212,0.05)]"
     >
       {/* Floating particles background inside the card */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-50">

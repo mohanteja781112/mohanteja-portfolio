@@ -241,10 +241,10 @@ const Achievements = () => {
         </div>
 
         {/* Milestone Dashboard */}
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 relative">
+        <div className="grid lg:grid-cols-12 gap-4 sm:gap-8 lg:gap-16 relative">
           
           {/* Left Side: Timeline Navigation */}
-          <div className="lg:col-span-4 relative z-20 flex flex-row lg:flex-col py-2 lg:py-4 overflow-x-auto lg:overflow-x-visible overflow-y-hidden lg:overflow-y-auto lg:max-h-[600px] lg:pr-2 hide-scrollbar snap-x snap-mandatory gap-3 sm:gap-4 lg:gap-0 mb-6 lg:mb-0">
+          <div className="lg:col-span-4 relative z-20 flex flex-row lg:flex-col py-2 lg:py-4 overflow-x-auto lg:overflow-x-visible overflow-y-hidden lg:overflow-y-auto lg:max-h-[600px] lg:pr-2 hide-scrollbar snap-x snap-mandatory gap-3 sm:gap-4 lg:gap-0 mb-2 sm:mb-6 lg:mb-0">
             {/* The vertical track (Desktop only) */}
             <div className="hidden lg:block absolute left-[31px] top-8 bottom-8 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent z-0"></div>
 
@@ -303,8 +303,9 @@ const Achievements = () => {
 
           {/* Right Side: Detail Panel */}
           <div 
-            className="lg:col-span-8 relative h-full min-h-[600px] rounded-[2rem] bg-white/[0.01] border border-white/[0.05] backdrop-blur-2xl overflow-hidden shadow-2xl flex flex-col p-6 sm:p-8 lg:p-12 group/panel"
+            className="lg:col-span-8 relative h-full min-h-0 lg:min-h-[600px] rounded-[2rem] bg-white/[0.01] border border-white/[0.05] backdrop-blur-sm lg:backdrop-blur-2xl overflow-hidden shadow-2xl flex flex-col p-6 sm:p-8 lg:p-12 group/panel"
             onMouseMove={(e) => {
+              if (window.innerWidth < 1024) return;
               const rect = e.currentTarget.getBoundingClientRect();
               setMousePosition({
                 x: e.clientX - rect.left,
@@ -357,7 +358,7 @@ const Achievements = () => {
                 </div>
 
                 {/* Minimal Achievement Constellation Background */}
-                <div className="absolute inset-0 translate-x-12 -translate-y-2 sm:-translate-y-4 pointer-events-none select-none z-0 opacity-30 sm:opacity-40 mix-blend-screen flex items-center justify-center scale-100 sm:scale-[1.5]">
+                <div className="absolute inset-0 translate-x-8 -translate-y-4 pointer-events-none select-none z-0 opacity-40 mix-blend-normal lg:mix-blend-screen flex items-center justify-center scale-[1.2] sm:scale-[1.5]">
                   <svg className="w-full h-full">
                     {/* Lines */}
                     {constellationLines.map((line, i) => {
@@ -413,21 +414,6 @@ const Achievements = () => {
 
                 <div className="h-full flex flex-col relative z-10">
                   
-                  {/* Top Row: Badge, Category, Year */}
-                  <div className="flex flex-wrap items-center gap-3 mb-6">
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.1, duration: 0.3 }}
-                      className={`px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full border flex items-center gap-1.5 backdrop-blur-md shadow-[0_0_15px_rgba(255,255,255,0.05)]
-                        ${selectedMilestone.theme.bg} ${selectedMilestone.theme.text} ${selectedMilestone.theme.border}
-                      `}
-                    >
-                      {selectedMilestone.highlight && <Trophy className="w-3 h-3 animate-pulse" />}
-                      {selectedMilestone.badge ? selectedMilestone.badge.replace(/🏆|🥈|🌟|👨‍💼/g, '').trim() : selectedMilestone.category}
-                    </motion.div>
-                    <span className="text-gray-500 text-sm font-medium">{selectedMilestone.year}</span>
-                  </div>
 
                   {/* Main Title & Subtitle */}
                   <div className="mb-4 sm:mb-10 relative">
@@ -453,7 +439,7 @@ const Achievements = () => {
                   </div>
 
                   {/* Snapshot Metric Cards */}
-                  <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-10">
+                  <div className="hidden sm:grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-10">
                     {[
                       { label: "Rank", value: selectedMilestone.rank },
                       { label: "Role", value: selectedMilestone.role },
@@ -463,9 +449,8 @@ const Achievements = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 + (i * 0.1), duration: 0.4, type: "spring", stiffness: 100 }}
-                        whileHover={{ y: -5, scale: 1.02 }}
                         key={i} 
-                        className="group relative p-2 sm:p-4 md:p-5 rounded-xl sm:rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+                        className="group relative p-2 sm:p-4 md:p-5 rounded-xl sm:rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm overflow-hidden shadow-lg lg:hover:shadow-xl lg:hover:-translate-y-1 lg:hover:scale-[1.02] transition-all duration-300"
                       >
                         {/* Hover Gradient Background */}
                         <div className={`absolute inset-0 bg-gradient-to-br ${selectedMilestone.theme.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
@@ -499,7 +484,7 @@ const Achievements = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.7, duration: 0.4 }}
-                    className="flex flex-col sm:flex-row flex-wrap sm:items-center gap-3 sm:gap-6 mb-6 sm:mb-12 py-3 sm:py-5 border-y border-white/5 relative"
+                    className="flex flex-col sm:flex-row flex-wrap sm:items-center gap-3 sm:gap-6 mb-3 sm:mb-12 py-3 sm:py-5 border-y border-white/5 relative"
                   >
                     <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-default">
                       <MapPin className="w-4 h-4 text-cyan-400" />
@@ -522,14 +507,14 @@ const Achievements = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8, duration: 0.4 }}
-                    className={`mt-auto flex flex-col sm:flex-row items-center justify-between p-4 sm:p-5 rounded-xl sm:rounded-2xl border backdrop-blur-sm relative overflow-hidden
-                      bg-gradient-to-r from-white/[0.03] to-transparent border-white/5 hover:border-white/10 transition-colors
+                    className={`mt-3 sm:mt-6 lg:mt-auto flex flex-col sm:flex-row items-center justify-between sm:p-5 rounded-xl sm:rounded-2xl sm:border backdrop-blur-sm relative overflow-hidden
+                      sm:bg-gradient-to-r sm:from-white/[0.03] sm:to-transparent sm:border-white/5 transition-colors
                     `}
                   >
                     {/* Inner glowing pulse */}
-                    <div className={`absolute top-0 right-0 w-32 h-32 ${selectedMilestone.theme.bg} blur-[50px] opacity-20 pointer-events-none animate-pulse`} />
+                    <div className={`hidden sm:block absolute top-0 right-0 w-32 h-32 ${selectedMilestone.theme.bg} blur-[50px] opacity-20 pointer-events-none animate-pulse`} />
 
-                    <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-0 w-full sm:w-auto relative z-10">
+                    <div className="hidden sm:flex items-center gap-3 sm:gap-4 mb-3 sm:mb-0 w-full sm:w-auto relative z-10">
                       <div className={`p-1.5 sm:p-2 rounded-full ${selectedMilestone.theme.bg} ${selectedMilestone.theme.text} ring-1 ring-white/10 shadow-[0_0_15px_rgba(255,255,255,0.05)]`}>
                         <CheckCircle2 className="w-4 h-4 sm:w-6 sm:h-6" />
                       </div>
