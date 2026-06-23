@@ -187,13 +187,13 @@ const Achievements = () => {
   const selectedMilestone = milestones.find(m => m.id === selectedId);
 
   return (
-    <section id="achievements" className="relative pt-16 pb-24 bg-[#050816] overflow-hidden">
+    <section id="achievements" className="relative pt-8 pb-20 lg:pt-16 lg:pb-24 bg-[#050816] overflow-hidden">
       <BackgroundEffects />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         
         {/* Header */}
-        <div className="mb-16 text-center">
+        <div className="mb-10 lg:mb-16 text-center">
           <motion.h2 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -214,7 +214,7 @@ const Achievements = () => {
         </div>
 
         {/* Metrics Row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-20 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-10 lg:mb-20 max-w-5xl mx-auto">
           {metrics.map((metric, idx) => {
             const Icon = metric.icon;
             return (
@@ -224,77 +224,81 @@ const Achievements = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1, duration: 0.6, ease: "easeOut" }}
-                className="group p-4 sm:p-6 rounded-2xl bg-white/[0.01] border border-white/5 hover:border-white/10 transition-colors backdrop-blur-md"
+                className="group p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/[0.01] border border-white/5 hover:border-white/10 transition-colors backdrop-blur-md"
               >
-                <div className="flex items-center gap-3 sm:gap-4 mb-2 sm:mb-3">
-                  <div className="p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-[#06B6D4]/10 text-[#06B6D4] group-hover:bg-[#06B6D4]/20 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all duration-300">
-                    <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                <div className="flex items-center gap-2 sm:gap-3 mb-1.5 sm:mb-2">
+                  <div className="p-1.5 sm:p-2 rounded-lg bg-[#06B6D4]/10 text-[#06B6D4] group-hover:bg-[#06B6D4]/20 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all duration-300">
+                    <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                     <AnimatedCounter value={metric.value} />
                   </h3>
                 </div>
-                <p className="text-[10px] sm:text-xs text-gray-500 font-semibold tracking-wide uppercase">{metric.label}</p>
+                <p className="text-[9px] sm:text-[10px] text-gray-500 font-semibold tracking-wider uppercase">{metric.label}</p>
               </motion.div>
             )
           })}
         </div>
 
         {/* Milestone Dashboard */}
-        <div className="grid lg:grid-cols-12 gap-4 sm:gap-8 lg:gap-16 relative">
+        <div className="grid lg:grid-cols-12 gap-4 sm:gap-8 md:gap-6 lg:gap-16 relative">
           
           {/* Left Side: Timeline Navigation */}
-          <div className="lg:col-span-4 relative z-20 flex flex-row lg:flex-col py-2 lg:py-4 overflow-x-auto lg:overflow-x-visible overflow-y-hidden lg:overflow-y-auto lg:max-h-[600px] lg:pr-2 hide-scrollbar snap-x snap-mandatory gap-3 sm:gap-4 lg:gap-0 mb-2 sm:mb-6 lg:mb-0">
+          <div className="lg:col-span-4 relative z-20 flex flex-row lg:flex-col justify-between lg:justify-start items-center lg:items-stretch py-2 lg:py-4 overflow-x-auto lg:overflow-x-visible lg:max-h-[600px] lg:pr-2 hide-scrollbar mb-2 lg:mb-0 px-2 sm:px-8 lg:px-0">
             {/* The vertical track (Desktop only) */}
-            <div className="hidden lg:block absolute left-[31px] top-8 bottom-8 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent z-0"></div>
+            <div className="hidden lg:block absolute left-[31px] top-8 bottom-8 w-px bg-white/10 z-0"></div>
+            
+            {/* Horizontal track (Mobile only) */}
+            <div className="lg:hidden absolute top-[32px] left-10 right-10 h-px bg-white/10 z-0"></div>
 
             {milestones.map((milestone) => {
               const isSelected = selectedId === milestone.id;
               const Icon = milestone.icon;
               return (
-                  <div 
+                <div 
                   key={milestone.id}
-                  className={`relative group cursor-pointer flex items-center lg:items-start gap-3 sm:gap-4 lg:gap-6 p-3 sm:p-4 lg:p-0 lg:py-6 min-w-[220px] sm:min-w-[280px] lg:min-w-0 snap-center rounded-2xl lg:rounded-none border lg:border-transparent transition-all duration-500 flex-shrink-0 lg:flex-shrink
-                    ${isSelected ? 'bg-white/10 lg:bg-transparent border-white/20' : 'bg-white/5 lg:bg-transparent border-transparent hover:bg-white/10 lg:hover:bg-transparent hover:border-white/10'}
-                  `}
+                  className="relative group cursor-pointer flex flex-col lg:flex-row items-center lg:items-start gap-2 lg:gap-4 lg:py-6 flex-shrink-0 z-10 lg:w-full"
                   onClick={() => setSelectedId(milestone.id)}
                 >
                   {/* Timeline Node */}
                   <div className="relative z-10 flex-shrink-0 lg:mt-1">
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center border transition-all duration-700
+                    <div className={`w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full flex items-center justify-center border transition-all duration-700
                       ${isSelected 
-                        ? `${milestone.theme.bg} border-transparent shadow-[0_0_30px_rgba(255,255,255,0.05)]` 
+                        ? `${milestone.theme.bg} border-transparent shadow-[0_0_30px_rgba(255,255,255,0.05)] scale-110 lg:scale-100` 
                         : 'bg-[#050816] border-white/10 group-hover:border-white/20'
                       }
                     `}>
-                      <Icon className={`w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 transition-colors duration-700 ${isSelected ? milestone.theme.text : 'text-gray-600 group-hover:text-gray-300'}`} />
+                      <Icon className={`w-5 h-5 md:w-5 md:h-5 lg:w-6 lg:h-6 transition-colors duration-700 ${isSelected ? milestone.theme.text : 'text-gray-600 group-hover:text-gray-300'}`} />
                     </div>
                   </div>
 
-                  {/* Timeline Content */}
-                  <div className={`flex-1 transition-all duration-700 ${isSelected ? 'translate-x-1 lg:translate-x-2' : ''}`}>
-                    <p className={`text-[9px] lg:text-[10px] font-bold tracking-widest uppercase mb-0.5 lg:mb-1.5 transition-colors duration-700
-                      ${isSelected ? milestone.theme.text : 'text-gray-600'}
-                    `}>{milestone.year}</p>
-                    <h4 className={`text-sm sm:text-base lg:text-xl font-bold transition-colors duration-700 line-clamp-1 lg:line-clamp-none ${isSelected ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'}`}>
-                      {milestone.title}
-                    </h4>
-                    
-                    <AnimatePresence>
-                      {isSelected && (
-                        <motion.div 
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.4 }}
-                          className="overflow-hidden"
-                        >
-                          <p className="text-sm text-gray-500 mt-2 font-medium">
-                            {milestone.category} <span className="mx-2 text-white/10">•</span> {milestone.level}
-                          </p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    {/* Timeline Content */}
+                    <div className={`flex flex-col items-center lg:items-start transition-all duration-700 ${isSelected ? 'lg:translate-x-2' : ''}`}>
+                      <p className={`text-[10px] font-bold tracking-widest uppercase transition-colors duration-700 ${isSelected ? milestone.theme.text : 'text-gray-600'}`}>
+                        {milestone.year}
+                      </p>
+                      
+                      {/* Only show title on desktop navigation */}
+                      <div className="hidden lg:block mt-1.5">
+                      <h4 className={`text-xl font-bold transition-colors duration-700 ${isSelected ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'}`}>
+                        {milestone.title}
+                      </h4>
+                      <AnimatePresence>
+                        {isSelected && (
+                          <motion.div 
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.4 }}
+                            className="overflow-hidden"
+                          >
+                            <p className="text-sm text-gray-500 mt-2 font-medium">
+                              {milestone.category} <span className="mx-2 text-white/10">•</span> {milestone.level}
+                            </p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </div>
                 </div>
               );
@@ -303,7 +307,7 @@ const Achievements = () => {
 
           {/* Right Side: Detail Panel */}
           <div 
-            className="lg:col-span-8 relative h-full min-h-0 lg:min-h-[600px] rounded-[2rem] bg-white/[0.01] border border-white/[0.05] backdrop-blur-sm lg:backdrop-blur-2xl overflow-hidden shadow-2xl flex flex-col p-6 sm:p-8 lg:p-12 group/panel"
+            className="lg:col-span-8 relative h-full min-h-0 lg:min-h-[450px] rounded-[2rem] bg-white/[0.01] border border-white/[0.05] backdrop-blur-sm lg:backdrop-blur-2xl overflow-hidden shadow-2xl flex flex-col p-6 sm:p-8 lg:p-8 group/panel"
             onMouseMove={(e) => {
               if (window.innerWidth < 1024) return;
               const rect = e.currentTarget.getBoundingClientRect();
@@ -358,7 +362,7 @@ const Achievements = () => {
                 </div>
 
                 {/* Minimal Achievement Constellation Background */}
-                <div className="absolute inset-0 translate-x-8 -translate-y-4 pointer-events-none select-none z-0 opacity-40 mix-blend-normal lg:mix-blend-screen flex items-center justify-center scale-[1.2] sm:scale-[1.5]">
+                <div className="absolute inset-0 translate-x-[5px] md:translate-x-[9px] lg:translate-x-[20px] -translate-y-4 pointer-events-none select-none z-0 opacity-40 mix-blend-normal lg:mix-blend-screen flex items-center justify-center scale-[1.2] sm:scale-[1.5]">
                   <svg className="w-full h-full">
                     {/* Lines */}
                     {constellationLines.map((line, i) => {
@@ -421,7 +425,7 @@ const Achievements = () => {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.2, duration: 0.5 }}
-                      className="text-2xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 mb-2 sm:mb-3 tracking-tight leading-tight"
+                      className="text-2xl sm:text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 mb-2 sm:mb-3 tracking-tight leading-tight"
                     >
                       {selectedMilestone.title}
                     </motion.h3>
@@ -429,7 +433,7 @@ const Achievements = () => {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.3, duration: 0.5 }}
-                      className={`text-xs sm:text-xl font-bold flex items-center gap-2 sm:gap-3`}
+                      className={`text-xs sm:text-base lg:text-lg font-bold flex items-center gap-2 sm:gap-3`}
                     >
                       <div className={`w-6 sm:w-8 h-px bg-gradient-to-r ${selectedMilestone.theme.gradient}`} />
                       <span className={`bg-clip-text text-transparent bg-gradient-to-r ${selectedMilestone.theme.gradient}`}>
@@ -439,7 +443,7 @@ const Achievements = () => {
                   </div>
 
                   {/* Snapshot Metric Cards */}
-                  <div className="hidden sm:grid grid-cols-3 gap-2 sm:gap-4 mb-4 sm:mb-10">
+                  <div className="hidden sm:grid grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-8">
                     {[
                       { label: "Rank", value: selectedMilestone.rank },
                       { label: "Role", value: selectedMilestone.role },
@@ -450,7 +454,7 @@ const Achievements = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 + (i * 0.1), duration: 0.4, type: "spring", stiffness: 100 }}
                         key={i} 
-                        className="group relative p-2 sm:p-4 md:p-5 rounded-xl sm:rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm overflow-hidden shadow-lg lg:hover:shadow-xl lg:hover:-translate-y-1 lg:hover:scale-[1.02] transition-all duration-300"
+                        className="group relative p-2 sm:p-3 lg:p-4 rounded-xl bg-white/[0.02] border border-white/5 backdrop-blur-sm overflow-hidden shadow-lg lg:hover:shadow-xl lg:hover:-translate-y-1 lg:hover:scale-[1.02] transition-all duration-300"
                       >
                         {/* Hover Gradient Background */}
                         <div className={`absolute inset-0 bg-gradient-to-br ${selectedMilestone.theme.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
@@ -459,7 +463,7 @@ const Achievements = () => {
                         <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:translate-x-[150%] transition-transform duration-1000 skew-x-12" />
                         
                         <p className="text-[7px] sm:text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-0.5 sm:mb-1 relative z-10 break-words">{stat.label}</p>
-                        <p className="text-xs sm:text-xl md:text-2xl font-bold text-white relative z-10 break-words">{stat.value}</p>
+                        <p className="text-xs sm:text-lg lg:text-xl font-bold text-white relative z-10 break-words">{stat.value}</p>
                         
                         {/* Bottom Glow Line */}
                         <div className={`absolute bottom-0 left-0 h-0.5 w-0 group-hover:w-full bg-gradient-to-r ${selectedMilestone.theme.gradient} transition-all duration-500`} />
@@ -472,9 +476,9 @@ const Achievements = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6, duration: 0.4 }}
-                    className="mb-4 sm:mb-10"
+                    className="mb-4 sm:mb-8"
                   >
-                    <p className="text-sm sm:text-lg text-gray-300 leading-relaxed font-medium">
+                    <p className="text-sm sm:text-base lg:text-[15px] text-gray-300 leading-relaxed font-medium">
                       {selectedMilestone.story}
                     </p>
                   </motion.div>
@@ -484,21 +488,21 @@ const Achievements = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.7, duration: 0.4 }}
-                    className="flex flex-col sm:flex-row flex-wrap sm:items-center gap-3 sm:gap-6 mb-3 sm:mb-12 py-3 sm:py-5 border-y border-white/5 relative"
+                    className="flex flex-col sm:flex-row flex-wrap sm:items-center gap-3 sm:gap-5 mb-3 lg:mb-8 py-3 sm:py-4 border-y border-white/5 relative"
                   >
                     <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-default">
-                      <MapPin className="w-4 h-4 text-cyan-400" />
-                      <span className="text-sm font-medium">{selectedMilestone.location}</span>
+                      <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                      <span className="text-xs sm:text-sm font-medium">{selectedMilestone.location}</span>
                     </div>
                     <div className="hidden sm:block w-1 h-1 rounded-full bg-gray-600"></div>
                     <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-default">
-                      <Building2 className="w-4 h-4 text-purple-400" />
-                      <span className="text-sm font-medium">{selectedMilestone.organization}</span>
+                      <Building2 className="w-3.5 h-3.5 text-purple-400" />
+                      <span className="text-xs sm:text-sm font-medium">{selectedMilestone.organization}</span>
                     </div>
                     <div className="hidden sm:block w-1 h-1 rounded-full bg-gray-600"></div>
                     <div className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors cursor-default">
-                      <Calendar className="w-4 h-4 text-amber-400" />
-                      <span className="text-sm font-medium">{selectedMilestone.event}</span>
+                      <Calendar className="w-3.5 h-3.5 text-amber-400" />
+                      <span className="text-xs sm:text-sm font-medium">{selectedMilestone.event}</span>
                     </div>
                   </motion.div>
 
@@ -507,7 +511,7 @@ const Achievements = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8, duration: 0.4 }}
-                    className={`mt-3 sm:mt-6 lg:mt-auto flex flex-col sm:flex-row items-center justify-between sm:p-5 rounded-xl sm:rounded-2xl sm:border backdrop-blur-sm relative overflow-hidden
+                    className={`mt-3 lg:mt-auto flex flex-col sm:flex-row items-center justify-between sm:p-4 rounded-xl sm:border backdrop-blur-sm relative overflow-hidden
                       sm:bg-gradient-to-r sm:from-white/[0.03] sm:to-transparent sm:border-white/5 transition-colors
                     `}
                   >
@@ -528,7 +532,7 @@ const Achievements = () => {
                       href={selectedMilestone.id === 'idea2impact' ? "/Idea2Impact(Winner)_Certificate.jpeg" : selectedMilestone.id === 'sushacks' ? "/Vignan_Hackathon_win.jpeg" : "#"}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`group relative overflow-hidden flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 w-full sm:w-auto z-10 hover:scale-105 bg-gradient-to-r ${selectedMilestone.theme.gradient} ${selectedMilestone.id === 'idea2impact' ? 'text-black' : 'text-white'}`}
+                      className={`group relative overflow-hidden flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-bold transition-all duration-300 w-full sm:w-auto z-10 hover:scale-105 bg-gradient-to-r ${selectedMilestone.theme.gradient} ${selectedMilestone.id === 'idea2impact' ? 'text-black' : 'text-white'}`}
                     >
                       <div className="absolute inset-0 -translate-x-[150%] bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:translate-x-[150%] transition-transform duration-1000 skew-x-12" />
                       <span className="relative z-10 flex items-center gap-2">
@@ -552,7 +556,7 @@ const Achievements = () => {
         animate={{ opacity: 0.7, y: [0, 8, 0] }}
         transition={{ initial: { duration: 0.8, delay: 1.5 }, y: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
         whileHover={{ opacity: 1, scale: 1.1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
+        className="hidden sm:block absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
       >
         <ChevronDown size={32} />
       </motion.div>

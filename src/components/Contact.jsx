@@ -51,13 +51,13 @@ const Contact = () => {
   const [hoveredNode, setHoveredNode] = useState(null);
 
   return (
-    <section id="contact" className="relative w-full min-h-screen bg-[#050816] py-16 flex flex-col justify-center overflow-hidden">
+    <section id="contact" className="relative w-full min-h-screen bg-[#050816] py-8 lg:py-16 flex flex-col justify-center overflow-hidden">
       <BackgroundEffects />
 
       {/* Additional Premium Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#8B5CF6]/5 blur-[50px] sm:blur-[100px] rounded-full sm:mix-blend-screen" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#06B6D4]/5 blur-[50px] sm:blur-[100px] rounded-full sm:mix-blend-screen" />
+        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-[#8B5CF6]/5 blur-[50px] lg:blur-[100px] rounded-full sm:mix-blend-screen" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#06B6D4]/5 blur-[50px] lg:blur-[100px] rounded-full sm:mix-blend-screen" />
         <div className="absolute top-0 bottom-0 left-0 right-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_10%,transparent_100%)] opacity-30" />
       </div>
       
@@ -69,7 +69,7 @@ const Contact = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-10 relative w-full"
+          className="text-center mb-6 lg:mb-10 relative w-full"
         >
           {/* Subtle glow behind title */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-24 bg-[#8B5CF6]/10 blur-[50px] pointer-events-none" />
@@ -78,7 +78,7 @@ const Contact = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_rgba(52,211,153,0.5)]" />
             Available For Opportunities
           </div>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-2">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-2">
             Let's Build The <br className="hidden sm:block"/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] to-[#8B5CF6]">Future Together</span>
           </h2>
@@ -96,7 +96,7 @@ const Contact = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="relative p-5 sm:p-6 rounded-3xl bg-[#050A1E]/60 backdrop-blur-xl border border-white/5 overflow-hidden group hover:border-white/10 transition-colors duration-500 flex flex-col h-full justify-center shadow-[0_0_30px_rgba(0,0,0,0.3)]"
+            className="relative p-4 sm:p-6 rounded-3xl bg-[#050A1E]/60 backdrop-blur-xl border border-white/5 overflow-hidden group hover:border-white/10 transition-colors duration-500 flex flex-col h-full justify-center shadow-[0_0_30px_rgba(0,0,0,0.3)]"
           >
             {/* Animated Scanning Effect */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#06B6D4]/5 to-transparent h-[200%] -top-[100%] animate-[scan_6s_linear_infinite] pointer-events-none" />
@@ -151,7 +151,7 @@ const Contact = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="relative w-full h-[280px] sm:h-[300px] rounded-3xl"
+            className="relative w-full h-[220px] sm:h-[300px] rounded-3xl"
           >
             {/* SVG Connecting Lines Layer */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
@@ -183,9 +183,9 @@ const Contact = () => {
                 <div className="absolute -inset-3 rounded-full border border-[#06B6D4]/20 border-t-[#06B6D4]/60 animate-[spin_4s_linear_infinite]" />
                 <div className="absolute -inset-6 rounded-full border border-[#8B5CF6]/10 border-b-[#8B5CF6]/50 animate-[spin_6s_linear_infinite_reverse]" />
                 
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#050A1E] border-2 border-white/10 shadow-[0_0_20px_rgba(139,92,246,0.2)] flex items-center justify-center overflow-hidden relative backdrop-blur-xl group-hover:border-white/30 transition-all duration-500">
+                <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-[#050A1E] border-2 border-white/10 shadow-[0_0_20px_rgba(139,92,246,0.2)] flex items-center justify-center overflow-hidden relative backdrop-blur-xl group-hover:border-white/30 transition-all duration-500">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#06B6D4]/10 to-[#8B5CF6]/10" />
-                  <span className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-slate-400">MT</span>
+                  <span className="text-lg sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-slate-400">MT</span>
                 </div>
               </div>
             </div>
@@ -201,17 +201,17 @@ const Contact = () => {
                   rel="noopener noreferrer"
                   onMouseEnter={() => setHoveredNode(node.id)}
                   onMouseLeave={() => setHoveredNode(null)}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 z-30 group flex flex-col items-center gap-2 transition-transform duration-500"
-                  style={{ top: `${node.y}%`, left: `${node.x}%` }}
+                  className={`absolute -translate-x-1/2 -translate-y-1/2 z-30 group flex flex-col items-center gap-2 transition-transform duration-500 ${node.id === 'email' ? 'left-[15%]' : node.id === 'linkedin' ? 'left-[85%]' : 'left-[50%]'}`}
+                  style={{ top: `${node.y}%` }}
                 >
-                  <div className={`relative p-3 rounded-2xl bg-[#050A1E]/80 backdrop-blur-xl border ${isHovered ? 'border-white/30 scale-110 ' + node.glow + '/40 shadow-[0_0_15px]' : 'border-white/10'} transition-all duration-500`}>
+                  <div className={`relative p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-[#050A1E]/80 backdrop-blur-xl border ${isHovered ? 'border-white/30 scale-110 ' + node.glow + '/40 shadow-[0_0_15px]' : 'border-white/10'} transition-all duration-500`}>
                     <node.icon className={`w-4 h-4 sm:w-5 sm:h-5 ${isHovered ? 'text-white' : 'text-slate-400'} transition-colors duration-500`} />
                     <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${node.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
                   </div>
 
                   {/* Expanding Label */}
-                  <div className={`absolute ${node.id === 'phone' ? 'top-full mt-3' : 'bottom-full mb-3'} px-3 py-1.5 rounded-lg bg-white/5 backdrop-blur-md border border-white/10 whitespace-nowrap pointer-events-none transition-all duration-300 ${isHovered ? 'opacity-100 translate-y-0' : `opacity-0 ${node.id === 'phone' ? '-translate-y-2' : 'translate-y-2'}`}`}>
-                    <span className={`text-[10px] sm:text-xs font-semibold tracking-wide ${node.textColor}`}>{node.label}</span>
+                  <div className={`absolute bottom-full mb-2 sm:mb-3 flex items-center justify-center ${node.id === 'email' ? '-left-4 sm:left-1/2 sm:-translate-x-1/2 lg:left-0 lg:translate-x-0' : node.id === 'linkedin' ? '-right-4 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 lg:left-auto lg:right-0 lg:translate-x-0' : 'left-1/2 -translate-x-1/2'} px-2 py-1 sm:px-3 sm:py-1.5 rounded-md sm:rounded-lg bg-white/5 backdrop-blur-md border border-white/10 whitespace-nowrap pointer-events-none transition-all duration-300 ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+                    <span className={`text-[8px] sm:text-xs font-semibold tracking-wide leading-none ${node.textColor}`}>{node.label}</span>
                   </div>
                 </a>
               );
@@ -224,7 +224,7 @@ const Contact = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="relative p-5 sm:p-6 rounded-3xl bg-[#050A1E]/60 backdrop-blur-xl border border-white/5 overflow-hidden flex flex-col justify-center items-center text-center group shadow-[0_0_30px_rgba(0,0,0,0.3)] hover:border-white/10 transition-all duration-500 h-full"
+            className="relative p-4 sm:p-6 rounded-3xl bg-[#050A1E]/60 backdrop-blur-xl border border-white/5 overflow-hidden flex flex-col justify-center items-center text-center group shadow-[0_0_30px_rgba(0,0,0,0.3)] hover:border-white/10 transition-all duration-500 h-full"
           >
             {/* Animated Scanning Effect */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#8B5CF6]/5 to-transparent h-[200%] -top-[100%] animate-[scan_6s_linear_infinite] pointer-events-none" />
@@ -236,7 +236,7 @@ const Contact = () => {
               Have an idea, project, internship, or opportunity? Let's discuss how I can bring value to your team.
             </p>
 
-            <div className="flex flex-col gap-3 w-full sm:w-auto relative z-10">
+            <div className="flex flex-row flex-wrap justify-center items-center gap-3 w-full relative z-10">
               <a 
                 href="mailto:doddimohanteja711@gmail.com"
                 className="relative group/btn flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl font-bold text-xs text-white overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)]"
@@ -275,17 +275,7 @@ const Contact = () => {
         }
       `}</style>
 
-      {/* Scroll to Top Button */}
-      <motion.button
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 0.7, scale: 1 }}
-        whileHover={{ opacity: 1, scale: 1.1, y: -5 }}
-        className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 p-3 bg-[#050A1E]/80 border border-white/10 rounded-full cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] hover:bg-[#06B6D4]/10 hover:border-[#06B6D4]/30 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300 backdrop-blur-md flex items-center justify-center group"
-        aria-label="Back to Top"
-      >
-        <Home className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-all duration-300" />
-      </motion.button>
+
     </section>
   );
 };

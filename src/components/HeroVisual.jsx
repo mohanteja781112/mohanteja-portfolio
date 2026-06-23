@@ -34,7 +34,7 @@ const HeroVisual = () => {
 
   return (
     <div 
-      className="relative w-full max-w-[500px] aspect-square flex items-center justify-center scale-[0.45] sm:scale-75 md:scale-90 lg:scale-100 transition-transform duration-500 origin-center mt-[-40px] sm:mt-0"
+      className="relative w-full max-w-[500px] aspect-square flex items-center justify-center scale-[0.45] sm:scale-75 md:scale-[0.60] lg:scale-100 transition-transform duration-500 origin-center -my-[130px] sm:-my-[60px] md:-my-[40px] lg:my-0"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >

@@ -207,19 +207,19 @@ const ImpactSection = () => {
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-      <div className="grid grid-cols-2 gap-3 sm:gap-6">
+      <div className="grid grid-cols-2 gap-3 sm:gap-6 md:gap-3 lg:gap-6">
         {metrics.map((metric, idx) => (
           <div 
             key={idx} 
-            className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-white/[0.03] border border-white/5 backdrop-blur-md flex flex-col items-center text-center group hover:bg-white/[0.06] hover:border-[#06B6D4]/40 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all duration-500 relative overflow-hidden"
+            className="p-4 sm:p-6 md:p-4 lg:p-6 rounded-2xl sm:rounded-3xl bg-white/[0.03] border border-white/5 backdrop-blur-md flex flex-col items-center text-center group hover:bg-white/[0.06] hover:border-[#06B6D4]/40 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all duration-500 relative overflow-hidden"
           >
             {/* Subtle glow effect behind numbers */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#06B6D4]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
-            <span className="text-2xl sm:text-5xl font-bold text-white mb-1 sm:mb-2 group-hover:text-[#06B6D4] group-hover:drop-shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-all duration-500 relative z-10">
+            <span className="text-2xl sm:text-5xl md:text-3xl lg:text-5xl font-bold text-white mb-1 sm:mb-2 group-hover:text-[#06B6D4] group-hover:drop-shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-all duration-500 relative z-10">
               <AnimatedCounter value={metric.value} suffix={metric.suffix} />
             </span>
-            <span className="text-[10px] sm:text-sm text-slate-400 font-medium tracking-wider sm:tracking-widest uppercase group-hover:text-slate-300 transition-colors relative z-10">
+            <span className="text-[10px] sm:text-sm md:text-xs lg:text-sm text-slate-400 font-medium tracking-wider sm:tracking-widest uppercase group-hover:text-slate-300 transition-colors relative z-10">
               {metric.label}
             </span>
           </div>
@@ -231,11 +231,11 @@ const ImpactSection = () => {
 
 const About = () => {
   return (
-    <section id="about" className="relative w-full min-h-screen flex items-center pt-12 pb-16 lg:py-16 px-6 sm:px-8 bg-[#050816] overflow-hidden">
+    <section id="about" className="relative w-full min-h-screen flex items-center pt-8 pb-10 md:pt-12 md:pb-16 lg:pt-16 lg:pb-24 px-6 sm:px-8 bg-[#050816] overflow-hidden">
       <BackgroundEffects />
       
       <div className="container mx-auto relative z-10 max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1.5fr] gap-10 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1.2fr_1.5fr] gap-10 md:gap-8 lg:gap-16 items-center">
           
           {/* Left Column: Identity Card */}
           <div className="relative w-full">
@@ -243,7 +243,7 @@ const About = () => {
           </div>
 
           {/* Right Column: Content */}
-          <div className="flex flex-col space-y-8 lg:space-y-12">
+          <div className="flex flex-col space-y-8 md:space-y-6 lg:space-y-12">
             <HeaderSection />
             <ImpactSection />
           </div>
@@ -258,7 +258,7 @@ const About = () => {
         animate={{ opacity: 0.7, y: [0, 8, 0] }}
         transition={{ initial: { duration: 0.8, delay: 1.5 }, y: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
         whileHover={{ opacity: 1, scale: 1.1 }}
-        className="absolute bottom-2 sm:bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
+        className="hidden sm:block absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
       >
         <ChevronDown size={32} />
       </motion.div>

@@ -18,7 +18,7 @@ const techNodes = [
   { id: 'frontend', label: 'Frontend', angle: 51.4, color: '#06B6D4', icon: ReactIcon },
   { id: 'backend', label: 'Backend', angle: 102.8, color: '#8B5CF6', icon: NodeIcon },
   { id: 'database', label: 'Database', angle: 154.3, color: '#10B981', icon: DatabaseIcon },
-  { id: 'ai', label: 'AI & ML', angle: 205.7, color: '#8B5CF6', icon: BrainIcon },
+  { id: 'ai', label: 'AI & ML', angle: 205.7, color: '#F59E0B', icon: BrainIcon },
   { id: 'cloud', label: 'Cloud', angle: 257.1, color: '#F59E0B', icon: CloudIcon },
   { id: 'tools', label: 'Tools', angle: 308.6, color: '#F43F5E', icon: GitIcon },
 ];
@@ -39,7 +39,7 @@ const terminalStats = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="relative w-full py-16 sm:min-h-screen lg:h-screen bg-[#050816] lg:py-0 flex flex-col justify-center overflow-hidden">
+    <section id="skills" className="relative w-full pt-8 pb-10 md:py-0 sm:min-h-screen md:h-screen bg-[#050816] flex flex-col justify-center overflow-hidden">
       <BackgroundEffects />
       
       <style>{`
@@ -52,10 +52,10 @@ const Skills = () => {
           to { transform: rotate(-360deg); }
         }
         .skills-orbit-container {
-          animation: skills-orbit-spin 100s linear infinite;
+          animation: skills-orbit-spin 20s linear infinite;
         }
         .skills-orbit-item {
-          animation: skills-orbit-spin-reverse 100s linear infinite;
+          animation: skills-orbit-spin-reverse 20s linear infinite;
         }
         @keyframes pulse-glow {
           0%, 100% { opacity: 0.4; transform: scale(1); }
@@ -70,13 +70,13 @@ const Skills = () => {
         }
       `}</style>
       
-      <div className="container relative z-10 mx-auto px-6 sm:px-8 flex flex-col">
+      <div className="container relative z-10 mx-auto px-6 sm:px-8 flex flex-col md:-mt-32 lg:mt-0">
         {/* Header Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-6 sm:mb-12"
+          className="text-center mb-4 sm:mb-12 md:mb-8 lg:mb-12"
         >
           <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-2">
             Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] to-[#8B5CF6]">Skills</span>
@@ -87,37 +87,36 @@ const Skills = () => {
         </motion.div>
 
         {/* Main Neural Matrix Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16 lg:gap-12 items-center flex-1">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1.8fr] lg:grid-cols-[1fr_1fr] gap-8 sm:gap-16 md:gap-6 lg:gap-12 items-center flex-1">
           
           {/* Orbital Neural Network */}
-          <div className="relative w-full flex justify-center items-center min-h-[250px] sm:min-h-[500px]">
+          <div className="relative w-full flex justify-center items-center min-h-[250px] sm:min-h-[500px] md:min-h-[300px] lg:min-h-[500px]">
             
             {/* The Rotating Container */}
-            <div className="absolute top-1/2 left-1/2 w-[210px] h-[210px] sm:w-[480px] sm:h-[480px] -translate-x-1/2 -translate-y-1/2">
+            <div className="absolute top-1/2 left-1/2 w-[166px] h-[166px] sm:w-[352px] sm:h-[352px] md:w-[224px] md:h-[224px] lg:w-[352px] lg:h-[352px] -translate-x-1/2 -translate-y-1/2">
               <div className="skills-orbit-container w-full h-full">
 
-              {/* Orbiting Premium Technology Chips */}
-              {techNodes.map((node) => {
+              {/* Minimalist Circular Satellites (3 tiny icons for all devices) */}
+              {[techNodes[1], techNodes[2], techNodes[4]].map((node, i) => {
                 const Icon = node.icon;
+                const angle = i * 120; // 3 satellites perfectly distributed
                 return (
                   <div 
-                    key={node.id}
+                    key={`sat-${node.id}`}
                     className="absolute"
                     style={{ 
-                      left: `${50 + 50 * Math.cos(node.angle * Math.PI / 180)}%`,
-                      top: `${50 + 50 * Math.sin(node.angle * Math.PI / 180)}%`
+                      left: `${50 + 50 * Math.cos(angle * Math.PI / 180)}%`,
+                      top: `${50 + 50 * Math.sin(angle * Math.PI / 180)}%`
                     }}
                   >
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                       <div className="skills-orbit-item">
-                        {/* Premium Glowing Chip */}
-                        <div className="relative group flex items-center gap-2 px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full border bg-[#050816]/90 backdrop-blur-xl shadow-xl transition-all duration-300 cursor-default border-white/10 hover:border-[#06B6D4]/50 hover:bg-[#06B6D4]/5 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)] hover:scale-110 whitespace-nowrap z-20 hover:z-50">
-                          <Icon className="w-3.5 h-3.5 sm:w-5 sm:h-5 transition-transform group-hover:scale-110" style={{ color: node.color }} />
-                          <span className="text-[10px] sm:text-sm font-semibold text-slate-300 group-hover:text-white transition-colors">
-                            {node.label}
-                          </span>
-                          {/* Subtle background glow on hover */}
-                          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                        {/* Premium Glowing Satellite */}
+                        <div 
+                          className="relative flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-full border bg-[#050816] transition-all duration-300 border-white/10 hover:border-[#06B6D4]/50 hover:bg-[#06B6D4]/10 z-20"
+                          style={{ boxShadow: `0 0 20px ${node.color}40` }}
+                        >
+                          <Icon className="w-4 h-4 sm:w-6 sm:h-6 md:w-5 md:h-5 lg:w-6 lg:h-6 transition-transform hover:scale-110" style={{ color: node.color }} />
                         </div>
                       </div>
                     </div>
@@ -129,7 +128,7 @@ const Skills = () => {
 
             {/* Central SKILL_ENGINE Core (Untouched logic, preserved dominance) */}
             <div className="absolute top-1/2 left-1/2 z-20" style={{ transform: 'translate(-50%, -50%)' }}>
-              <div className="relative w-24 h-24 sm:w-48 sm:h-48 flex items-center justify-center cursor-crosshair">
+              <div className="relative w-24 h-24 sm:w-48 sm:h-48 md:w-36 md:h-36 lg:w-48 lg:h-48 flex items-center justify-center cursor-crosshair">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#8B5CF6] to-[#06B6D4] opacity-50 blur-[30px]"></div>
                   
                   {/* Rotating Energy Layers */}
@@ -137,17 +136,17 @@ const Skills = () => {
                   <div className="absolute inset-[-20px] rounded-full border-[2px] border-t-transparent border-r-[#06B6D4] border-b-transparent border-l-[#8B5CF6] animate-[spin_6s_linear_infinite_reverse]"></div>
                   
                   {/* Core physical boundary */}
-                  <div className="absolute inset-2 rounded-full border-2 border-[#06B6D4]/50 bg-[#050816]/95 flex items-center justify-center backdrop-blur-2xl shadow-[0_0_50px_rgba(139,92,246,0.5)] overflow-hidden">
+                  <div className="absolute inset-2 rounded-full border-2 border-[#06B6D4]/50 bg-[#050816] flex items-center justify-center shadow-[0_0_50px_rgba(139,92,246,0.5)] overflow-hidden">
                     <div className="text-center relative z-10 px-2">
-                      <span className="block text-[7px] sm:text-xs font-bold text-[#8B5CF6] tracking-widest leading-tight mb-0.5">MOHAN'S</span>
-                      <span className="block text-[8px] sm:text-sm font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] to-white tracking-widest leading-tight">SKILL_ENGINE</span>
+                      <span className="block text-[7px] sm:text-xs md:text-[9px] lg:text-xs font-bold text-[#8B5CF6] tracking-widest leading-tight mb-0.5">MOHAN'S</span>
+                      <span className="block text-[8px] sm:text-sm md:text-[10px] lg:text-sm font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] to-white tracking-widest leading-tight">SKILL_ENGINE</span>
                     </div>
                   </div>
                   
                   {/* Multiple glowing rings */}
-                  <div className="absolute inset-[-15px] sm:inset-[-40px] rounded-full border border-dashed border-[#06B6D4]/40 animate-[spin_15s_linear_infinite]"></div>
-                  <div className="absolute inset-[-25px] sm:inset-[-60px] rounded-full border border-[#8B5CF6]/30 animate-[spin_25s_linear_infinite_reverse]"></div>
-                  <div className="absolute inset-[-35px] sm:inset-[-80px] rounded-full border border-dotted border-white/20 animate-[spin_40s_linear_infinite]"></div>
+                  <div className="absolute inset-[-15px] sm:inset-[-40px] md:inset-[-20px] lg:inset-[-40px] rounded-full border border-dashed border-[#06B6D4]/40 animate-[spin_15s_linear_infinite]"></div>
+                  <div className="absolute inset-[-25px] sm:inset-[-60px] md:inset-[-30px] lg:inset-[-60px] rounded-full border border-[#8B5CF6]/30 animate-[spin_25s_linear_infinite_reverse]"></div>
+                  <div className="absolute inset-[-35px] sm:inset-[-80px] md:inset-[-40px] lg:inset-[-80px] rounded-full border border-dotted border-white/20 animate-[spin_40s_linear_infinite]"></div>
                 </div>
               </div>
 
@@ -158,7 +157,7 @@ const Skills = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col justify-center w-full max-w-2xl mx-auto lg:mx-0 mt-0 sm:mt-8 lg:mt-0"
+            className="flex flex-col justify-center w-full max-w-2xl mx-auto md:mx-0 mt-0 sm:mt-8 md:mt-0"
           >
             <div className="w-full bg-[#050816]/90 rounded-2xl border border-[#06B6D4]/20 shadow-[0_0_50px_rgba(6,182,212,0.1)] backdrop-blur-sm lg:backdrop-blur-2xl overflow-hidden relative">
               
@@ -172,11 +171,11 @@ const Skills = () => {
               </div>
               
               {/* Terminal Body */}
-              <div className="p-4 sm:p-8 font-mono text-[10px] sm:text-sm relative h-full">
+              <div className="p-4 sm:p-8 md:p-5 lg:p-8 font-mono text-[10px] sm:text-sm md:text-[11px] lg:text-sm relative h-full">
                 {/* Background Grid */}
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#06B6D4_1px,transparent_1px),linear-gradient(to_bottom,#06B6D4_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-[0.03] pointer-events-none" />
 
-                <div className="space-y-2.5 sm:space-y-5 relative z-10">
+                <div className="space-y-2.5 sm:space-y-5 md:space-y-3 lg:space-y-5 relative z-10">
                   {terminalStats.map((stat, idx) => (
                     <motion.div 
                       key={idx}
@@ -186,7 +185,7 @@ const Skills = () => {
                       transition={{ delay: idx * 0.1 }}
                       className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 group cursor-default"
                     >
-                      <span className="text-[#8B5CF6] font-semibold tracking-wider uppercase sm:min-w-[100px] text-[10px] sm:text-xs">{stat.label}:</span>
+                      <span className="text-[#8B5CF6] font-semibold tracking-wider uppercase sm:min-w-[100px] text-[10px] sm:text-xs md:text-[11px] lg:text-xs">{stat.label}:</span>
                       <span className="text-slate-300 group-hover:text-white transition-colors">{stat.value}</span>
                     </motion.div>
                   ))}
@@ -213,7 +212,7 @@ const Skills = () => {
         animate={{ opacity: 0.7, y: [0, 8, 0] }}
         transition={{ initial: { duration: 0.8, delay: 1.5 }, y: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
         whileHover={{ opacity: 1, scale: 1.1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
+        className="hidden sm:block absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
       >
         <ChevronDown size={32} />
       </motion.div>

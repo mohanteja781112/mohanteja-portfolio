@@ -22,11 +22,18 @@ const Navbar = () => {
     
     if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     
-    if (item.toLowerCase() === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
-    }
+    setTimeout(() => {
+      if (item.toLowerCase() === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const element = document.getElementById(item.toLowerCase());
+        if (element) {
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }
+    }, 50);
 
     // Re-enable scroll spy after scrolling finishes
     scrollTimeoutRef.current = setTimeout(() => {
@@ -96,8 +103,8 @@ const Navbar = () => {
       transition={{ duration: 0.35, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between ${
         isScrolled 
-          ? 'py-4 bg-[#050A1E]/75 backdrop-blur-[20px] shadow-[0_4px_30px_rgba(6,182,212,0.15)] border-b border-[#06B6D4]/20' 
-          : 'py-5 bg-[#050816]/50 backdrop-blur-[12px] border-b border-transparent'
+          ? 'py-3 sm:py-4 bg-[#050A1E]/75 backdrop-blur-[20px] shadow-[0_4px_30px_rgba(6,182,212,0.15)] border-b border-[#06B6D4]/20' 
+          : 'py-3.5 sm:py-5 bg-[#050816]/50 backdrop-blur-[12px] border-b border-transparent'
       } transition-colors duration-300`}
     >
       {/* Subtle floating glow particles behind navbar */}
@@ -106,10 +113,10 @@ const Navbar = () => {
         <div className="absolute top-[-50%] right-[20%] w-[100px] h-[100px] bg-[#06B6D4]/20 blur-[50px] rounded-full"></div>
       </div>
 
-      <div className="container mx-auto px-8 flex items-center justify-between relative z-10">
+      <div className="container mx-auto px-6 sm:px-8 flex items-center justify-between relative z-10">
         {/* Left side: Logo */}
         <div className="flex items-center cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          <span className="text-2xl font-bold tracking-tighter transition-all duration-300 group-hover:drop-shadow-[0_0_15px_rgba(6,182,212,0.4)]">
+          <span className="text-xl sm:text-2xl font-bold tracking-tighter transition-all duration-300 group-hover:drop-shadow-[0_0_15px_rgba(6,182,212,0.4)]">
             <span className="text-white">Mohan</span>
             <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4]">Teja</span>
           </span>
@@ -151,7 +158,7 @@ const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="text-white hover:text-[#06B6D4] transition-colors"
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
@@ -166,30 +173,34 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
             className="absolute top-full left-0 w-full bg-[#050816]/95 backdrop-blur-2xl border-b border-[#06B6D4]/20 lg:hidden overflow-hidden"
           >
-            <div className="flex flex-col px-8 py-6 space-y-6">
+            <div className="flex flex-col px-8 py-4 space-y-3">
               {menuItems.map((item, i) => (
-                <motion.span
+                <motion.a
                   key={item}
+                  href={`#${item.toLowerCase()}`}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  onClick={() => handleNavClick(item)}
-                  className={`text-lg font-medium tracking-wide cursor-pointer transition-colors duration-300 ${
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(item);
+                  }}
+                  className={`block w-full py-1.5 text-base font-medium tracking-wide cursor-pointer transition-colors duration-300 ${
                     activeSection === item.toLowerCase() ? 'text-[#06B6D4]' : 'text-white/80 hover:text-white'
                   }`}
                 >
                   {item}
-                </motion.span>
+                </motion.a>
               ))}
               
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: menuItems.length * 0.1 }}
-                className="pt-4 mt-2 border-t border-white/10"
+                className="pt-3 mt-1 border-t border-white/10"
               >
-                <a href="/Mohan_Teja_Doddi_Resume (Diamond).pdf" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] text-white font-medium rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.3)] active:scale-95 transition-all duration-300">
-                  <FileText size={20} />
+                <a href="/Mohan_Teja_Doddi_Resume (Diamond).pdf" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] text-white text-sm font-medium rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.3)] active:scale-95 transition-all duration-300">
+                  <FileText size={16} />
                   <span>Resume</span>
                 </a>
               </motion.div>

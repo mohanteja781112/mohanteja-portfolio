@@ -77,7 +77,7 @@ const Hero = () => {
 
       {/* Global Mouse Follow Glow */}
       <motion.div
-        className="absolute w-[600px] h-[600px] bg-gradient-to-r from-[#8B5CF6]/10 to-[#06B6D4]/10 rounded-full blur-[120px] pointer-events-none z-0 hidden lg:block"
+        className="absolute w-[600px] h-[600px] lg:w-[600px] lg:h-[600px] bg-gradient-to-r from-[#8B5CF6]/10 to-[#06B6D4]/10 rounded-full blur-[120px] pointer-events-none z-0 hidden lg:block"
         style={{
           x: useTransform(mouseX, x => x - 300),
           y: useTransform(mouseY, y => y - 300),
@@ -86,14 +86,14 @@ const Hero = () => {
 
 
 
-      <div className="container relative z-10 mx-auto px-6 sm:px-8 pt-8 sm:pt-16 pb-12 sm:pb-28 lg:pt-0 lg:pb-0 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <div className="container relative z-10 mx-auto px-6 sm:px-8 pt-0 sm:pt-16 md:pt-0 pb-2 sm:pb-28 md:pb-0 lg:pt-0 lg:pb-0 flex flex-col-reverse md:grid md:grid-cols-[1.2fr_1fr] lg:grid-cols-2 gap-0 md:gap-4 lg:gap-12 items-center">
         {/* Left Side: Text Content */}
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="relative z-10 lg:pr-10">
+        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="relative z-10 md:pr-0 lg:pr-10">
           
           {/* Left section decorative elements (Particles removed per request) */}
 
           {/* Animated badge above name */}
-          <motion.div variants={itemVariants} className="mb-4 sm:mb-6 flex flex-wrap justify-center lg:justify-start gap-1.5 sm:gap-2 text-[8px] sm:text-xs font-bold tracking-[0.1em] sm:tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-slate-400 to-slate-200 uppercase">
+          <motion.div variants={itemVariants} className="mb-4 sm:mb-6 flex flex-wrap justify-center md:justify-start gap-1.5 sm:gap-2 text-[8px] sm:text-xs font-bold tracking-[0.1em] sm:tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-slate-400 to-slate-200 uppercase">
             <span>FULL STACK DEVELOPER</span>
             <span className="text-[#8B5CF6]">|</span>
             <span>AI ENGINEER</span>
@@ -101,7 +101,7 @@ const Hero = () => {
             <span>PROBLEM SOLVER</span>
           </motion.div>
 
-          <motion.h1 variants={itemVariants} className="text-white text-[clamp(2.2rem,6vw,4.5rem)] font-bold tracking-tight mb-2 sm:mb-4 relative leading-[1.1] sm:leading-tight text-center lg:text-left">
+          <motion.h1 variants={itemVariants} className="text-white text-[clamp(2.2rem,6vw,4.5rem)] font-bold tracking-tight mb-2 sm:mb-4 relative leading-[1.1] sm:leading-tight text-center md:text-left">
             <span className="opacity-90">Hi, I'm</span> <br className="hidden md:block" />
             <motion.span 
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
@@ -112,46 +112,26 @@ const Hero = () => {
             </motion.span>
           </motion.h1>
 
-          <motion.div variants={itemVariants} className="h-8 sm:h-10 mb-6 sm:mb-8 flex items-center justify-center lg:justify-start text-[clamp(1rem,4vw,1.875rem)] font-medium">
+          <motion.div variants={itemVariants} className="h-8 sm:h-10 mb-6 sm:mb-8 flex items-center justify-center md:justify-start text-[clamp(1rem,4vw,1.875rem)] font-medium">
             {/* Fixed-width container to prevent layout shifts */}
-            <div className="min-w-[200px] sm:min-w-[320px] lg:min-w-[380px] flex items-center justify-center lg:justify-start">
+            <div className="min-w-[200px] sm:min-w-[320px] md:min-w-[280px] lg:min-w-[380px] flex items-center justify-center md:justify-start">
               <span className="text-[#06B6D4] drop-shadow-[0_0_10px_rgba(6,182,212,0.4)]">
                 {text}
               </span>
               <motion.span
                 animate={{ opacity: [1, 0, 1] }}
                 transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
-                className="inline-block w-[3px] h-6 sm:h-7 lg:h-8 bg-[#06B6D4] ml-1.5 align-middle shadow-[0_0_8px_#06B6D4]"
+                className="inline-block w-[3px] h-6 sm:h-7 md:h-7 lg:h-8 bg-[#06B6D4] ml-1.5 align-middle shadow-[0_0_8px_#06B6D4]"
               />
             </div>
           </motion.div>
 
-          {/* Minimal Trust Indicators */}
-          <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-4 mb-6 sm:mb-10 text-[11px] sm:text-sm font-medium text-white/60">
-            <span className="flex items-center gap-1 sm:gap-1.5 hover:text-[#06B6D4] hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-all duration-300 cursor-default">
-              <span className="text-[14px] sm:text-base">🏆</span> 2 Hackathon Awards
-            </span>
-            <span className="text-white/20 hidden sm:block">•</span>
-            <span className="flex items-center gap-1 sm:gap-1.5 hover:text-[#06B6D4] hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-all duration-300 cursor-default">
-              <span className="text-[14px] sm:text-base">🚀</span> 3 Featured Projects
-            </span>
-            <span className="text-white/20 hidden sm:block">•</span>
-            <span className="flex items-center gap-1 sm:gap-1.5 hover:text-[#06B6D4] hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-all duration-300 cursor-default">
-              <span className="text-[14px] sm:text-base">💻</span> Full Stack Developer
-            </span>
-          </motion.div>
 
-          {/* Floating status indicator */}
-          <motion.div variants={itemVariants} className="flex items-center justify-center mx-auto lg:mx-0 gap-2 mb-4 sm:mb-6 w-fit px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[#06B6D4]/30 bg-[#06B6D4]/10 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.15)]">
-            <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#08CB00] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-full w-full bg-[#08CB00] shadow-[0_0_8px_#08CB00]"></span>
-            </span>
-            <span className="text-[11px] sm:text-sm font-medium text-[#06B6D4] tracking-wide">Available for Opportunities</span>
-          </motion.div>
+
+
 
           {/* CTA Redesign */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-5 w-full sm:w-auto mt-2 sm:mt-4">
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto mt-2 sm:mt-4">
             {/* Primary Button */}
             <a 
               href="https://github.com/mohanteja781112" 
@@ -185,7 +165,7 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-          className="flex justify-center items-center w-full h-[280px] sm:h-[380px] lg:h-auto lg:min-h-[500px] mb-2 sm:mb-8 lg:mb-0"
+          className="flex justify-center items-center w-full h-[280px] sm:h-[380px] md:h-auto md:min-h-[450px] lg:min-h-[500px] mb-2 sm:mb-8 md:mb-0 -mt-20 sm:-mt-0"
         >
           <HeroVisual />
         </motion.div>
@@ -198,7 +178,7 @@ const Hero = () => {
         animate={{ opacity: 0.7, y: [0, 8, 0] }}
         transition={{ initial: { duration: 0.8, delay: 1.5 }, y: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
         whileHover={{ opacity: 1, scale: 1.1 }}
-        className="absolute bottom-3 sm:bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
+        className="hidden sm:block absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
       >
         <ChevronDown size={32} />
       </motion.div>

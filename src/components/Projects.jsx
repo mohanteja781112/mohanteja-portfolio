@@ -121,7 +121,7 @@ const Projects = () => {
   const activeProject = projectsData.find(p => p.id === activeId);
 
   return (
-    <section id="projects" className="relative w-full min-h-screen bg-[#050816] pt-16 pb-24 flex flex-col items-center overflow-hidden">
+    <section id="projects" className="relative w-full min-h-screen bg-[#050816] pt-8 pb-20 lg:pt-16 lg:pb-24 flex flex-col items-center overflow-hidden">
       <BackgroundEffects />
       
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
@@ -132,7 +132,7 @@ const Projects = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10"
+          className="text-center mb-6 lg:mb-10"
         >
           <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-2">
             Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] to-[#8B5CF6]">Projects</span>
@@ -144,21 +144,27 @@ const Projects = () => {
         </motion.div>
 
         {/* Split Dashboard Layout */}
-        <div className="grid grid-cols-1 xl:grid-cols-[320px_1fr] gap-6 xl:gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr] gap-6 md:gap-8 items-start">
           
           {/* LEFT SIDE: Project Navigation List */}
-          <div className="w-full xl:w-72 flex-shrink-0 z-10 mb-4 sm:mb-8 xl:mb-0 flex xl:flex-col gap-4 overflow-x-auto xl:overflow-x-visible pb-4 xl:pb-0 hide-scrollbar snap-x snap-mandatory">
+          <div className="w-full lg:w-72 xl:w-72 flex-shrink-0 z-10 mb-4 sm:mb-8 lg:mb-0 flex lg:flex-col gap-4 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 hide-scrollbar snap-x snap-mandatory">
             {projectsData.map((project, index) => {
               const isActive = project.id === activeId;
               const Icon = project.icon;
               return (
                 <button
                   key={project.id}
-                  onClick={() => {
+                  onClick={(e) => {
                     setActiveId(project.id);
                     setActiveTab('impact');
+                    // Smoothly scroll the clicked tab to the center horizontally
+                    if (window.innerWidth < 1024) {
+                      const container = e.currentTarget.parentElement;
+                      const scrollLeft = e.currentTarget.offsetLeft - (container.offsetWidth / 2) + (e.currentTarget.offsetWidth / 2);
+                      container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                    }
                   }}
-                  className={`relative flex items-center gap-2.5 sm:gap-3 p-2 sm:p-3 rounded-xl sm:rounded-2xl text-left transition-all duration-500 min-w-[200px] sm:min-w-[260px] xl:min-w-0 snap-center border
+                  className={`relative flex items-center gap-2.5 sm:gap-3 p-2 sm:p-3 rounded-xl sm:rounded-2xl text-left transition-all duration-500 min-w-[200px] sm:min-w-[260px] lg:min-w-0 snap-center border
                     ${isActive ? 'border-transparent' : 'bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/20'}
                   `}
                 >
@@ -180,13 +186,13 @@ const Projects = () => {
                     <Icon className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px]" />
                   </div>
                   
-                  <div className="relative z-10 flex-1">
-                    <h4 className={`text-sm sm:text-base font-bold tracking-tight transition-colors duration-500 ${isActive ? 'text-white' : 'text-slate-300'}`}>
+                  <div className="relative z-10 flex-1 min-w-0">
+                    <h4 className={`text-sm sm:text-base font-bold tracking-tight truncate transition-colors duration-500 ${isActive ? 'text-white' : 'text-slate-300'}`}>
                       {project.name}
                     </h4>
                     <div className="flex items-center gap-1.5 sm:gap-2 mt-0.5">
                       <span className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${project.statusBg} ${isActive ? 'animate-pulse' : 'opacity-50'}`}></span>
-                      <span className={`text-[9px] sm:text-[11px] font-mono tracking-wider uppercase ${isActive ? project.statusColor : 'text-slate-500'}`}>
+                      <span className={`text-[9px] sm:text-[11px] font-mono tracking-wider uppercase truncate block ${isActive ? project.statusColor : 'text-slate-500'}`}>
                         {project.category}
                       </span>
                     </div>
@@ -210,9 +216,9 @@ const Projects = () => {
           </div>
 
           {/* RIGHT SIDE: Project Showcase Panel (Image + Terminal Hybrid) */}
-          <div className="relative w-full rounded-3xl bg-[#0a0f1c]/40 border border-white/[0.08] backdrop-blur-sm lg:backdrop-blur-3xl p-3 sm:p-5 lg:p-8 overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.6)] flex flex-col ring-1 ring-white/5 h-auto lg:h-[800px]">
+          <div className="relative w-full rounded-3xl bg-[#0a0f1c]/40 border border-white/[0.08] backdrop-blur-sm lg:backdrop-blur-3xl p-3 sm:p-5 lg:p-8 overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.6)] flex flex-col ring-1 ring-white/5 h-auto">
             {/* Ambient Background Glow matching active project */}
-            <div className={`absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl ${activeProject.accent} opacity-15 blur-[60px] sm:blur-[120px] rounded-full pointer-events-none transition-all duration-1000`}></div>
+            <div className={`absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl ${activeProject.accent} opacity-15 blur-[60px] lg:blur-[120px] rounded-full pointer-events-none transition-all duration-1000`}></div>
 
             <AnimatePresence mode="wait">
               <motion.div
@@ -229,7 +235,7 @@ const Projects = () => {
                   href={activeProject.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full h-auto sm:h-[260px] lg:h-auto lg:flex-[4] relative rounded-2xl overflow-hidden group border border-white/[0.08] bg-[#02040a] shadow-inner flex-shrink-0 cursor-pointer block transform transition-transform duration-500"
+                  className="w-full lg:h-[280px] relative rounded-2xl overflow-hidden group border border-white/[0.08] bg-[#02040a] shadow-inner flex-shrink-0 cursor-pointer block transform transition-transform duration-500"
                 >
                   {/* Subtle Glowing Background */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${activeProject.accent} opacity-5 group-hover:opacity-15 transition-opacity duration-500 pointer-events-none`} />
@@ -238,7 +244,7 @@ const Projects = () => {
                   <img 
                     src={activeProject.image}
                     alt={activeProject.name}
-                    className="relative z-0 w-full h-auto sm:h-full object-cover sm:object-top opacity-90 group-hover:opacity-100 transition-all duration-[8s] ease-in-out sm:group-hover:object-bottom"
+                    className="relative z-0 w-full h-auto lg:h-full object-contain lg:object-cover object-top opacity-90 group-hover:opacity-100 transition-all duration-[8s] ease-in-out lg:group-hover:object-bottom"
                   />
                   
                   {/* Interactive Hover Indicator */}
@@ -370,7 +376,7 @@ const Projects = () => {
                     </div>
 
                     {/* Actions Section (~15% of total visual weight) */}
-                    <div className="pt-3 sm:pt-5 mt-2 sm:mt-4 border-t border-white/10 flex-shrink-0 relative z-20 bg-[#0a0f1c]/20 rounded-xl p-3 sm:p-5 backdrop-blur-sm border border-white/5 shadow-inner">
+                    <div className="pt-3 sm:pt-5 mt-2 sm:mt-4 flex-shrink-0 relative z-20 bg-[#0a0f1c]/20 sm:bg-transparent rounded-xl sm:rounded-none p-3 sm:p-0 backdrop-blur-sm sm:backdrop-blur-none border border-white/5 sm:border-none shadow-inner sm:shadow-none border-t border-white/10 sm:border-t-0">
                       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.5 }} className="grid grid-cols-2 sm:flex sm:flex-row gap-2 sm:gap-3 w-full">
                         {activeProject.video && (
                           <a 
@@ -428,7 +434,7 @@ const Projects = () => {
         animate={{ opacity: 0.7, y: [0, 8, 0] }}
         transition={{ initial: { duration: 0.8, delay: 1.5 }, y: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
         whileHover={{ opacity: 1, scale: 1.1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
+        className="hidden sm:block absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
       >
         <ChevronDown size={32} />
       </motion.div>
