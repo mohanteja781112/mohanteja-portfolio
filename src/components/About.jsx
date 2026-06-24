@@ -207,19 +207,19 @@ const ImpactSection = () => {
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-      <div className="grid grid-cols-2 gap-3 sm:gap-6 md:gap-3 lg:gap-6">
+      <div className="grid grid-cols-2 gap-3 sm:gap-6 md:gap-3 lg:gap-4 xl:gap-5">
         {metrics.map((metric, idx) => (
           <div 
             key={idx} 
-            className="p-4 sm:p-6 md:p-4 lg:p-6 rounded-2xl sm:rounded-3xl bg-white/[0.03] border border-white/5 backdrop-blur-md flex flex-col items-center text-center group hover:bg-white/[0.06] hover:border-[#06B6D4]/40 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all duration-500 relative overflow-hidden"
+            className="p-4 sm:p-6 md:p-4 lg:p-4 xl:p-5 rounded-2xl sm:rounded-3xl bg-white/[0.03] border border-white/5 backdrop-blur-md flex flex-col items-center text-center group hover:bg-white/[0.06] hover:border-[#06B6D4]/40 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all duration-500 relative overflow-hidden"
           >
             {/* Subtle glow effect behind numbers */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#06B6D4]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             
-            <span className="text-2xl sm:text-5xl md:text-3xl lg:text-5xl font-bold text-white mb-1 sm:mb-2 group-hover:text-[#06B6D4] group-hover:drop-shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-all duration-500 relative z-10">
+            <span className="text-2xl sm:text-5xl md:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:text-[#06B6D4] group-hover:drop-shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-all duration-500 relative z-10">
               <AnimatedCounter value={metric.value} suffix={metric.suffix} />
             </span>
-            <span className="text-[10px] sm:text-sm md:text-xs lg:text-sm text-slate-400 font-medium tracking-wider sm:tracking-widest uppercase group-hover:text-slate-300 transition-colors relative z-10">
+            <span className="text-[10px] sm:text-sm md:text-xs lg:text-xs xl:text-[13px] text-slate-400 font-medium tracking-wider sm:tracking-widest uppercase group-hover:text-slate-300 transition-colors relative z-10">
               {metric.label}
             </span>
           </div>

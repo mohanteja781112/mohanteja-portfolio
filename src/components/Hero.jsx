@@ -84,14 +84,28 @@ const Hero = () => {
         }}
       />
 
+      {/* HUGE BACKGROUND TEXT FOR LAPTOP */}
+      <motion.div 
+        className="hidden lg:flex absolute inset-0 items-center justify-center pointer-events-none z-0 overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+      >
+        <div className="flex flex-col items-center justify-center whitespace-nowrap mt-10">
+          <h1 className="text-[9rem] xl:text-[12rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-white/[0.06] to-transparent leading-[0.8] select-none tracking-tighter mix-blend-screen">
+            MOHAN TEJA
+          </h1>
+          <h1 className="text-[9rem] xl:text-[12rem] font-black text-transparent bg-clip-text bg-gradient-to-t from-white/[0.06] to-transparent leading-[0.8] select-none tracking-tighter mix-blend-screen -mt-4 xl:-mt-8">
+            DODDI
+          </h1>
+        </div>
+      </motion.div>
 
-
-      <div className="container relative z-10 mx-auto px-6 sm:px-8 pt-0 sm:pt-16 md:pt-0 pb-2 sm:pb-28 md:pb-0 lg:pt-0 lg:pb-0 flex flex-col-reverse md:grid md:grid-cols-[1.2fr_1fr] lg:grid-cols-2 gap-0 md:gap-4 lg:gap-12 items-center">
-        {/* Left Side: Text Content */}
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="relative z-10 md:pr-0 lg:pr-10">
+      <div className="container relative z-10 mx-auto px-6 sm:px-8 pt-0 sm:pt-16 md:pt-0 pb-2 sm:pb-28 md:pb-0 lg:pt-0 lg:pb-0 flex flex-col-reverse md:grid md:grid-cols-[1.2fr_1fr] lg:flex lg:flex-col lg:items-center lg:justify-center gap-0 md:gap-4 lg:gap-0 items-center lg:min-h-screen lg:py-10">
+        
+        {/* Left Side: Text Content (Visible on Mobile & Tablet, Hidden on Laptop) */}
+        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="relative z-10 md:pr-0 lg:hidden w-full">
           
-          {/* Left section decorative elements (Particles removed per request) */}
-
           {/* Animated badge above name */}
           <motion.div variants={itemVariants} className="mb-4 sm:mb-6 flex flex-wrap justify-center md:justify-start gap-1.5 sm:gap-2 text-[8px] sm:text-xs font-bold tracking-[0.1em] sm:tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-slate-400 to-slate-200 uppercase">
             <span>FULL STACK DEVELOPER</span>
@@ -126,10 +140,6 @@ const Hero = () => {
             </div>
           </motion.div>
 
-
-
-
-
           {/* CTA Redesign */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto mt-2 sm:mt-4">
             {/* Primary Button */}
@@ -160,15 +170,101 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-        {/* Right Side: Visual Element */}
+        {/* Right Side / Centered Visual Element */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-          className="flex justify-center items-center w-full h-[280px] sm:h-[380px] md:h-auto md:min-h-[450px] lg:min-h-[500px] mb-2 sm:mb-8 md:mb-0 -mt-20 sm:-mt-0"
+          className="relative z-20 flex justify-center items-center w-full h-[280px] sm:h-[380px] md:h-auto md:min-h-[450px] lg:h-[500px] xl:h-[600px] mb-2 sm:mb-8 md:mb-0 -mt-20 sm:-mt-0 lg:mt-0"
         >
           <HeroVisual />
+
+          {/* Floating Elements ONLY on laptop (lg) */}
+          <div className="hidden lg:block absolute inset-0 pointer-events-none w-full h-full">
+            {/* Floating "Hi, I'm Mohan" badge */}
+            <motion.div 
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="absolute top-0 left-1/2 -translate-x-1/2 flex items-center gap-3 backdrop-blur-md bg-white/5 px-6 py-2.5 rounded-full border border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.05)] pointer-events-auto"
+            >
+              <span className="text-white/80 text-sm font-medium">Hi, I'm</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] font-bold text-lg">Mohan Teja Doddi</span>
+            </motion.div>
+
+            {/* Floating tags */}
+            <motion.div 
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="absolute top-[15%] xl:top-[25%] left-0 xl:left-[5%] -translate-y-1/2 flex flex-col gap-3 z-30"
+            >
+              <div className="backdrop-blur-md bg-[#050816]/80 border border-white/10 px-5 py-2.5 rounded-2xl shadow-[0_0_30px_rgba(139,92,246,0.15)] text-[10px] xl:text-xs font-bold tracking-[0.2em] text-slate-300 uppercase transition-transform hover:scale-105 pointer-events-auto">
+                Full Stack Developer
+              </div>
+              <div className="backdrop-blur-md bg-[#050816]/80 border border-white/10 px-5 py-2.5 rounded-2xl shadow-[0_0_30px_rgba(6,182,212,0.15)] text-[10px] xl:text-xs font-bold tracking-[0.2em] text-slate-300 uppercase ml-8 transition-transform hover:scale-105 pointer-events-auto">
+                AI Engineer
+              </div>
+              <div className="backdrop-blur-md bg-[#050816]/80 border border-white/10 px-5 py-2.5 rounded-2xl shadow-[0_0_30px_rgba(139,92,246,0.15)] text-[10px] xl:text-xs font-bold tracking-[0.2em] text-slate-300 uppercase ml-16 transition-transform hover:scale-105 pointer-events-auto">
+                Problem Solver
+              </div>
+            </motion.div>
+
+            {/* Floating Typewriter */}
+            <motion.div 
+              initial={{ x: 20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 1.2 }}
+              className="absolute bottom-[15%] xl:bottom-[25%] right-0 xl:right-[5%] translate-y-1/2 backdrop-blur-md bg-[#050816]/80 border border-[#06B6D4]/30 px-8 py-4 rounded-2xl shadow-[0_0_30px_rgba(6,182,212,0.2)] pointer-events-auto"
+            >
+              <div className="text-xl xl:text-2xl font-medium flex items-center min-w-[200px] justify-center">
+                <span className="text-[#06B6D4] drop-shadow-[0_0_10px_rgba(6,182,212,0.4)]">
+                  {text}
+                </span>
+                <motion.span
+                  animate={{ opacity: [1, 0, 1] }}
+                  transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                  className="inline-block w-[3px] h-6 xl:h-7 bg-[#06B6D4] ml-2 shadow-[0_0_8px_#06B6D4]"
+                />
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
+
+        {/* Laptop CTAs (hidden on mobile/tablet, float at bottom on lg) */}
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 1.4 }}
+          className="hidden lg:flex gap-6 z-30 relative mt-4 xl:mt-8"
+        >
+          {/* Primary Button */}
+          <a 
+            href="https://github.com/mohanteja781112" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="relative group overflow-hidden rounded-xl p-[1px] cursor-pointer block"
+          >
+            <span className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] rounded-xl opacity-70 group-hover:opacity-100 group-hover:blur-md transition-all duration-300 animate-pulse"></span>
+            <div className="relative flex items-center justify-center gap-2 px-8 py-3.5 bg-[#050816] rounded-xl group-hover:bg-opacity-0 transition-all duration-300 h-full">
+              <span className="text-base text-white font-semibold relative z-10 transition-colors">View Github</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-[18px] h-[18px] text-[#06B6D4] group-hover:text-white transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                <path d="M9 18c-4.51 2-5-2-7-2"/>
+              </svg>
+            </div>
+          </a>
+          
+          {/* Secondary Button */}
+          <button 
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className="flex items-center justify-center gap-2 px-8 py-3.5 bg-white/5 backdrop-blur-md text-slate-200 text-base font-semibold rounded-xl border border-white/10 hover:border-[#06B6D4] hover:text-[#06B6D4] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:-translate-y-1 active:scale-95 transition-all duration-300 group"
+          >
+            <span>Contact Me</span>
+            <Phone className="w-[18px] h-[18px] transition-transform duration-300 group-hover:rotate-12 group-hover:text-[#06B6D4]" />
+          </button>
+        </motion.div>
+
       </div>
 
       {/* Scroll Indicator */}
