@@ -83,7 +83,7 @@ const projectsData = [
       { icon: CheckCircle2, text: "Academic Automation" }
     ],
     github: "https://github.com/mohanteja781112/Siddhartha-EduHub",
-    demo: "https://siddhartha-eduhub.vercel.app/",
+    demo: "https://www.siddharthaiitfoundation.com/",
     image: "/siddhartha_eduhub.png",
     accent: "from-[#FFD700] to-yellow-500", // Bright Gold
     glowHover: "hover:shadow-[0_0_30px_rgba(255,215,0,0.4)]",

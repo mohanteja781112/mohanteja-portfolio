@@ -27,7 +27,7 @@ const HeroVisual = () => {
   };
 
   const PROJECTS = [
-    { title: "Siddhartha EduHub", desc: "School ERP", icon: GraduationCap, color: "#FFD700", stats: "10k+ Users", url: "https://siddhartha-eduhub.vercel.app/" },
+    { title: "Siddhartha EduHub", desc: "School ERP", icon: GraduationCap, color: "#FFD700", stats: "10k+ Users", url: "https://www.siddharthaiitfoundation.com/" },
     { title: "NearMeds", desc: "Emergency Health", icon: HeartPulse, color: "#06B6D4", stats: "24/7 Access", url: "https://near-meds.vercel.app/" },
     { title: "Apparel Fit", desc: "AI Try-On", icon: Shirt, color: "#8B5CF6", stats: "99% Accuracy", url: "#" }
   ];

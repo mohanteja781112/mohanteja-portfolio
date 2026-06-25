@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import BackgroundEffects from './BackgroundEffects';
 
@@ -38,7 +38,7 @@ const AnimatedCounter = ({ value, duration = 2, suffix = "" }) => {
   );
 };
 
-const CompactTerminal = () => {
+const CompactTerminalContent = () => {
   const [history, setHistory] = useState([]);
   const [currentCmdIndex, setCurrentCmdIndex] = useState(0);
   const [currentCmdText, setCurrentCmdText] = useState("");
@@ -47,10 +47,10 @@ const CompactTerminal = () => {
 
   const commands = [
     { cmd: "whoami", output: "AI + Full Stack Developer" },
-    { cmd: "education", output: "B.Tech Computer Science and Engineering" },
-    { cmd: "college", output: "Vignan's Institute of Information Technology" },
+    { cmd: "education", output: "B.Tech CSE" },
+    { cmd: "college", output: "Vignan's IIT" },
     { cmd: "graduation", output: "2027" },
-    { cmd: "location", output: "Anakapalle, Andhra Pradesh, India" }
+    { cmd: "location", output: "Anakapalle, India" }
   ];
 
   useEffect(() => {
@@ -71,15 +71,14 @@ const CompactTerminal = () => {
         
         delayTimeout = setTimeout(() => {
           setHistory((prev) => {
-            // Extra safety to prevent duplicates
             if (prev.length > 0 && prev[prev.length - 1].cmd === commands[currentCmdIndex].cmd) return prev;
             return [...prev, commands[currentCmdIndex]];
           });
           setCurrentCmdText("");
           setCurrentCmdIndex((prev) => prev + 1);
-        }, 400); // delay before showing output and next command
+        }, 400);
       }
-    }, 50); // typing speed
+    }, 50);
 
     return () => {
       clearInterval(typeInterval);
@@ -87,12 +86,10 @@ const CompactTerminal = () => {
     };
   }, [inView, currentCmdIndex]);
 
-  // Instantly finish animation if user scrolls past the section
   useEffect(() => {
     const handleScroll = () => {
       if (terminalRef.current) {
         const rect = terminalRef.current.getBoundingClientRect();
-        // If terminal is scrolled out of view ABOVE the screen, finish immediately
         if (rect.bottom < 0 && currentCmdIndex < commands.length) {
           setHistory(commands);
           setCurrentCmdIndex(commands.length);
@@ -105,35 +102,36 @@ const CompactTerminal = () => {
   }, [currentCmdIndex]);
 
   return (
-    <div ref={terminalRef} className="w-full text-left font-mono text-[10px] sm:text-[11px] leading-normal sm:leading-relaxed text-slate-300 bg-[#050816]/80 rounded-xl p-3 sm:p-5 border border-white/5 shadow-inner mt-4 sm:mt-8">
+    <div ref={terminalRef} className="w-full h-full flex flex-col text-left font-mono text-[10px] sm:text-[11px] leading-normal sm:leading-relaxed text-slate-300">
       {/* Terminal Header */}
-      <div className="flex gap-1.5 mb-4 border-b border-white/5 pb-3">
-        <div className="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
-        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
-        <div className="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
+      <div className="flex gap-1.5 mb-4 border-b border-white/10 pb-3 relative z-10">
+        <div className="w-2.5 h-2.5 rounded-full bg-red-500/80 shadow-[0_0_5px_rgba(239,68,68,0.5)]"></div>
+        <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 shadow-[0_0_5px_rgba(234,179,8,0.5)]"></div>
+        <div className="w-2.5 h-2.5 rounded-full bg-green-500/80 shadow-[0_0_5px_rgba(34,197,94,0.5)]"></div>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-3 relative z-10 flex-1 overflow-y-auto no-scrollbar pb-2">
         {history.map((item, i) => (
-          <motion.div 
-            key={i} 
-            initial={{ opacity: 0, y: 2 }} 
-            animate={{ opacity: 1, y: 0 }} 
-          >
-            <div className="flex items-center text-[#06B6D4]">
+          <div key={i}>
+            <div className="flex items-center">
               <span className="text-[#8B5CF6] mr-2">❯</span>
-              <span className="font-semibold">{item.cmd}</span>
+              <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] to-[#8B5CF6]">{item.cmd}</span>
             </div>
-            <div className="pl-4 mt-1 text-slate-400 font-medium">
+            <motion.div 
+              initial={{ opacity: 0, y: 5 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.4 }}
+              className="pl-4 mt-1 text-slate-400 font-medium tracking-wide"
+            >
               {item.output}
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         ))}
 
         {currentCmdIndex < commands.length && (
-          <div className="flex items-center text-[#06B6D4]">
+          <div className="flex items-center">
             <span className="text-[#8B5CF6] mr-2">❯</span>
-            <span className="font-semibold">{currentCmdText}</span>
+            <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] to-[#8B5CF6]">{currentCmdText}</span>
             <motion.span 
               animate={{ opacity: [1, 0] }} 
               transition={{ repeat: Infinity, duration: 0.8 }} 
@@ -143,7 +141,7 @@ const CompactTerminal = () => {
         )}
         
         {currentCmdIndex >= commands.length && (
-          <div className="flex items-center text-[#06B6D4]">
+          <div className="flex items-center">
             <span className="text-[#8B5CF6] mr-2">❯</span>
             <motion.span 
               animate={{ opacity: [1, 0] }} 
@@ -157,97 +155,135 @@ const CompactTerminal = () => {
   );
 };
 
-const IdentityCard = () => {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, x: -30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      className="relative w-full rounded-3xl overflow-hidden bg-gradient-to-b from-white/[0.05] to-transparent border border-white/10 backdrop-blur-sm lg:backdrop-blur-2xl p-5 sm:p-8 hover:border-[#06B6D4]/40 transition-colors duration-500 group shadow-[0_0_40px_rgba(6,182,212,0.05)]"
-    >
-      {/* Floating particles background inside the card */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-50">
-        <div className="absolute top-[10%] left-[10%] w-2 h-2 bg-[#06B6D4] rounded-full blur-[2px] animate-pulse"></div>
-        <div className="absolute bottom-[20%] right-[10%] w-3 h-3 bg-[#8B5CF6] rounded-full blur-[2px] animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-[50%] right-[25%] w-1.5 h-1.5 bg-white rounded-full blur-[1px] animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+const BioCard = () => (
+  <div className="w-full bg-[#050816]/40 border border-white/10 backdrop-blur-xl rounded-3xl p-6 sm:p-8 lg:p-8 xl:p-10 relative overflow-hidden group hover:border-[#8B5CF6]/40 hover:shadow-[0_0_40px_rgba(139,92,246,0.15)] transition-all duration-500">
+    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[#8B5CF6]/10 to-transparent rounded-full blur-[80px] group-hover:from-[#8B5CF6]/20 transition-all duration-700 pointer-events-none"></div>
+    <div className="relative z-10">
+      <div className="flex items-center gap-4 mb-3 lg:mb-4">
+        <div className="h-[2px] w-12 bg-gradient-to-r from-[#06B6D4] to-transparent"></div>
+        <span className="text-[#06B6D4] font-bold tracking-[0.2em] text-xs sm:text-sm uppercase">Discover</span>
       </div>
-
-      <div className="relative z-10 flex flex-col items-center text-center">
-        <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-6 tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#06B6D4] group-hover:to-[#8B5CF6] transition-all duration-500">Mohan Teja Doddi</h3>
-        
-        {/* Compact Terminal */}
-        <CompactTerminal />
-
+      <h2 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-black text-white mb-4 lg:mb-5 tracking-tight leading-tight flex items-center gap-3">
+        About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] via-[#06B6D4] to-[#8B5CF6] bg-[length:200%_auto] animate-gradient">Me</span>
+      </h2>
+      <div className="border-l-4 border-[#8B5CF6] pl-5 lg:pl-6 py-1 lg:py-2 mb-4 lg:mb-5 drop-shadow-[0_0_15px_rgba(139,92,246,0.2)]">
+        <p className="text-lg sm:text-xl lg:text-xl xl:text-2xl text-slate-200 font-medium">
+          Building Technology That Solves <span className="text-[#06B6D4]">Real Problems</span>
+        </p>
       </div>
-    </motion.div>
-  );
-};
-
-const HeaderSection = () => (
-  <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-    <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-2 sm:mb-3 tracking-tight">
-      About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#06B6D4] to-[#8B5CF6]">Me</span>
-    </h2>
-    <p className="text-base sm:text-xl text-slate-300 font-light mb-4 sm:mb-6 border-l-2 border-[#06B6D4] pl-3 sm:pl-4 drop-shadow-[0_0_8px_rgba(6,182,212,0.3)]">
-      Building Technology That Solves Real Problems
-    </p>
-    <p className="text-slate-400 leading-relaxed max-w-2xl text-sm sm:text-base font-light">
-      I specialize in architecting full-stack applications and integrating intelligent AI features to create seamless user experiences. Driven by innovation, I actively focus on building impactful real-world projects that scale and make a difference.
-    </p>
-  </motion.div>
+      <p className="text-slate-400 leading-relaxed max-w-2xl text-sm sm:text-base lg:text-base xl:text-lg font-light">
+        I specialize in architecting full-stack applications and integrating intelligent AI features to create seamless user experiences. Driven by innovation, I actively focus on building impactful real-world projects that scale and make a difference.
+      </p>
+    </div>
+  </div>
 );
 
-const ImpactSection = () => {
+const TerminalCard = () => (
+  <div className="w-full h-full bg-[#050816]/40 border border-white/10 backdrop-blur-xl rounded-3xl p-6 lg:p-6 xl:p-8 relative overflow-hidden group hover:border-[#06B6D4]/40 hover:shadow-[0_0_40px_rgba(6,182,212,0.15)] transition-all duration-500 flex flex-col min-h-[350px] lg:min-h-0">
+    <div className="absolute bottom-0 left-0 w-full h-[300px] bg-gradient-to-tr from-[#06B6D4]/10 to-transparent rounded-full blur-[80px] group-hover:from-[#06B6D4]/20 transition-all duration-700 pointer-events-none"></div>
+    
+    <div className="relative z-10 flex-1 flex flex-col h-full">
+      <div className="flex items-center gap-3 xl:gap-4 mb-5 xl:mb-6">
+        <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] p-[1px] shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+          <div className="w-full h-full rounded-full bg-[#050816] flex items-center justify-center">
+            <span className="text-xs lg:text-sm font-black text-white tracking-wider">MD</span>
+          </div>
+        </div>
+        <div>
+          <h3 className="text-lg lg:text-xl font-bold text-white tracking-wide">Mohan Teja</h3>
+          <p className="text-[#8B5CF6] text-[10px] lg:text-xs font-semibold tracking-widest uppercase mt-0.5">Software Engineer</p>
+        </div>
+      </div>
+
+      <div className="flex-1 w-full bg-[#050816]/80 rounded-2xl p-4 lg:p-5 border border-[#06B6D4]/20 shadow-inner relative overflow-hidden group-hover:border-[#06B6D4]/40 transition-colors duration-500">
+        <CompactTerminalContent />
+      </div>
+    </div>
+  </div>
+);
+
+const StatCard = ({ metric }) => (
+  <div className="w-full bg-[#050816]/40 border border-white/10 backdrop-blur-xl rounded-3xl p-4 lg:p-5 flex flex-col items-center justify-center text-center relative overflow-hidden group hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] transition-all duration-500 hover:-translate-y-1 h-[120px] sm:h-[130px] lg:h-[120px] xl:h-[140px]">
+    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+    <span className="relative z-10 text-3xl sm:text-4xl lg:text-3xl xl:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 mb-2 lg:mb-3 group-hover:from-[#06B6D4] group-hover:to-[#8B5CF6] transition-all duration-500">
+      <AnimatedCounter value={metric.value} suffix={metric.suffix} />
+    </span>
+    <span className="relative z-10 text-[9px] sm:text-[10px] xl:text-[11px] font-bold tracking-[0.2em] uppercase text-slate-400 group-hover:text-slate-200 transition-colors duration-500 leading-tight">
+      {metric.label}
+    </span>
+  </div>
+);
+
+const About = () => {
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
   const metrics = [
     { value: "10", suffix: "+", label: "Projects Built" },
     { value: "GFG", suffix: "", label: "Chapter Chair" },
     { value: "2", suffix: "", label: "Hackathon Awards" },
-    { value: "GSSoC", suffix: "", label: "Open Source Contributor" },
+    { value: "GSSoC", suffix: "", label: "Open Source" },
   ];
 
-  return (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-      <div className="grid grid-cols-2 gap-3 sm:gap-6 md:gap-3 lg:gap-4 xl:gap-5">
-        {metrics.map((metric, idx) => (
-          <div 
-            key={idx} 
-            className="p-4 sm:p-6 md:p-4 lg:p-4 xl:p-5 rounded-2xl sm:rounded-3xl bg-white/[0.03] border border-white/5 backdrop-blur-md flex flex-col items-center text-center group hover:bg-white/[0.06] hover:border-[#06B6D4]/40 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all duration-500 relative overflow-hidden"
-          >
-            {/* Subtle glow effect behind numbers */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#06B6D4]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
-            <span className="text-2xl sm:text-5xl md:text-3xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 group-hover:text-[#06B6D4] group-hover:drop-shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-all duration-500 relative z-10">
-              <AnimatedCounter value={metric.value} suffix={metric.suffix} />
-            </span>
-            <span className="text-[10px] sm:text-sm md:text-xs lg:text-xs xl:text-[13px] text-slate-400 font-medium tracking-wider sm:tracking-widest uppercase group-hover:text-slate-300 transition-colors relative z-10">
-              {metric.label}
-            </span>
-          </div>
-        ))}
-      </div>
-    </motion.div>
-  );
-};
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
 
-const About = () => {
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
   return (
-    <section id="about" className="relative w-full min-h-screen flex items-center pt-8 pb-10 md:pt-12 md:pb-16 lg:pt-16 lg:pb-24 px-6 sm:px-8 bg-[#050816] overflow-hidden">
+    <section id="about" className="relative w-full min-h-screen flex items-center py-20 lg:py-0 px-4 sm:px-8 bg-[#050816] overflow-hidden">
       <BackgroundEffects />
       
+      {/* HUGE BACKGROUND TEXT */}
+      <motion.div 
+        style={{ y }}
+        className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden"
+      >
+        <h1 className="text-[12rem] md:text-[20rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-white/[0.03] to-transparent select-none tracking-tighter mix-blend-screen whitespace-nowrap">
+          KNOW ME
+        </h1>
+      </motion.div>
+
       <div className="container mx-auto relative z-10 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1.2fr_1.5fr] gap-10 md:gap-8 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-6 xl:gap-8 items-stretch">
+          {/* Left Column: Bio + Stats */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="col-span-12 lg:col-span-7 flex flex-col gap-4 sm:gap-6 lg:gap-6 xl:gap-8"
+          >
+            {/* Main Bio Content */}
+            <BioCard />
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-4 xl:gap-6">
+              {metrics.map((metric, idx) => (
+                <StatCard key={idx} metric={metric} />
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right Column: Terminal / Identity */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+            className="col-span-12 lg:col-span-5 h-full"
+          >
+            <TerminalCard />
+          </motion.div>
           
-          {/* Left Column: Identity Card */}
-          <div className="relative w-full">
-            <IdentityCard />
-          </div>
-
-          {/* Right Column: Content */}
-          <div className="flex flex-col space-y-8 md:space-y-6 lg:space-y-12">
-            <HeaderSection />
-            <ImpactSection />
-          </div>
-
         </div>
       </div>
 
@@ -258,7 +294,7 @@ const About = () => {
         animate={{ opacity: 0.7, y: [0, 8, 0] }}
         transition={{ initial: { duration: 0.8, delay: 1.5 }, y: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
         whileHover={{ opacity: 1, scale: 1.1 }}
-        className="hidden sm:block absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
+        className="hidden sm:block absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
       >
         <ChevronDown size={32} />
       </motion.div>
