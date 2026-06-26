@@ -122,16 +122,16 @@ const Hero = () => {
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 1 }}
-              className="absolute top-[-5%] sm:top-[5%] md:top-[0%] lg:top-[-5%] xl:top-[5%] 2xl:top-[15%] left-0 sm:left-[-10px] xl:left-[5%] -translate-y-1/2 flex flex-col gap-1.5 sm:gap-2 lg:gap-3 z-30"
+              className="absolute top-[-15%] sm:top-[5%] md:top-[0%] lg:top-[-5%] xl:top-[5%] 2xl:top-[15%] left-0 sm:left-[-10px] xl:left-[5%] -translate-y-1/2 flex flex-col items-end gap-1.5 sm:gap-2 lg:gap-3 z-30"
             >
               <div className="backdrop-blur-md bg-[#050816]/80 border border-white/10 px-2 sm:px-4 lg:px-5 py-1 sm:py-2 lg:py-2.5 rounded-lg sm:rounded-xl lg:rounded-2xl shadow-[0_0_30px_rgba(139,92,246,0.15)] text-[6.5px] sm:text-[8.5px] lg:text-[10px] xl:text-xs font-bold tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] text-slate-300 uppercase transition-transform hover:scale-105 pointer-events-auto">
+                Competitive Programmer
+              </div>
+              <div className="backdrop-blur-md bg-[#050816]/80 border border-white/10 px-2 sm:px-4 lg:px-5 py-1 sm:py-2 lg:py-2.5 rounded-lg sm:rounded-xl lg:rounded-2xl shadow-[0_0_30px_rgba(6,182,212,0.15)] text-[6.5px] sm:text-[8.5px] lg:text-[10px] xl:text-xs font-bold tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] text-slate-300 uppercase transition-transform hover:scale-105 pointer-events-auto">
                 Full Stack Developer
               </div>
-              <div className="backdrop-blur-md bg-[#050816]/80 border border-white/10 px-2 sm:px-4 lg:px-5 py-1 sm:py-2 lg:py-2.5 rounded-lg sm:rounded-xl lg:rounded-2xl shadow-[0_0_30px_rgba(6,182,212,0.15)] text-[6.5px] sm:text-[8.5px] lg:text-[10px] xl:text-xs font-bold tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] text-slate-300 uppercase ml-2 sm:ml-6 lg:ml-8 transition-transform hover:scale-105 pointer-events-auto">
+              <div className="backdrop-blur-md bg-[#050816]/80 border border-white/10 px-2 sm:px-4 lg:px-5 py-1 sm:py-2 lg:py-2.5 rounded-lg sm:rounded-xl lg:rounded-2xl shadow-[0_0_30px_rgba(139,92,246,0.15)] text-[6.5px] sm:text-[8.5px] lg:text-[10px] xl:text-xs font-bold tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] text-slate-300 uppercase transition-transform hover:scale-105 pointer-events-auto">
                 AI & ML Engineer
-              </div>
-              <div className="backdrop-blur-md bg-[#050816]/80 border border-white/10 px-2 sm:px-4 lg:px-5 py-1 sm:py-2 lg:py-2.5 rounded-lg sm:rounded-xl lg:rounded-2xl shadow-[0_0_30px_rgba(139,92,246,0.15)] text-[6.5px] sm:text-[8.5px] lg:text-[10px] xl:text-xs font-bold tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] text-slate-300 uppercase ml-4 sm:ml-12 lg:ml-16 transition-transform hover:scale-105 pointer-events-auto">
-                Competitive Programmer
               </div>
             </motion.div>
 
