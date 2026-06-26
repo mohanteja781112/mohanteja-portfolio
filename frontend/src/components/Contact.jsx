@@ -231,7 +231,7 @@ const Contact = () => {
 
             <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-[#06B6D4]/10 via-[#8B5CF6]/5 to-transparent blur-[30px] pointer-events-none" />
 
-            <div className="relative z-10 flex flex-col items-center md:items-start lg:items-center flex-1 w-full">
+            <div className="relative z-10 flex flex-col items-center md:items-start lg:items-center flex-none md:flex-1 lg:flex-none w-full">
               <h3 className="text-lg sm:text-2xl lg:text-xl font-bold text-white mb-2">Ready to Collaborate?</h3>
               <p className="text-slate-400 text-xs sm:text-sm lg:text-xs font-medium max-w-sm md:max-w-[90%] lg:max-w-sm mx-auto md:mx-0 lg:mx-auto">
                 Have an idea, project, internship, or opportunity? Let's discuss how I can bring value to your team.
