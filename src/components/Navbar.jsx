@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { FileText, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 
+const menuItems = ['Home', 'About', 'Skills', 'Projects', 'Achievements'];
+
 const Navbar = () => {
-  const menuItems = ['Home', 'About', 'Skills', 'Projects', 'Achievements'];
   const [isScrolled, setIsScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -89,9 +90,11 @@ const Navbar = () => {
       setActiveSection(current);
     };
 
+    handleScrollSpy(); // Call it once initially to set the active section on page load
+
     window.addEventListener('scroll', handleScrollSpy, { passive: true });
     return () => window.removeEventListener('scroll', handleScrollSpy);
-  }, [menuItems]);
+  }, []);
 
   return (
     <motion.nav 
@@ -170,37 +173,54 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute top-full left-0 w-full bg-[#050816]/95 backdrop-blur-2xl border-b border-[#06B6D4]/20 lg:hidden overflow-hidden"
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="absolute top-full left-0 w-full bg-[#050A1E]/95 backdrop-blur-3xl border-b border-[#06B6D4]/20 lg:hidden overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
           >
-            <div className="flex flex-col px-8 py-4 space-y-3">
-              {menuItems.map((item, i) => (
-                <motion.a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(item);
-                  }}
-                  className={`block w-full py-1.5 text-base font-medium tracking-wide cursor-pointer transition-colors duration-300 ${
-                    activeSection === item.toLowerCase() ? 'text-[#06B6D4]' : 'text-white/80 hover:text-white'
-                  }`}
-                >
-                  {item}
-                </motion.a>
-              ))}
+            <div className="flex flex-col px-6 py-6 space-y-2 relative">
+              {/* Background Glows for Modern Feel */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-[#8B5CF6]/10 blur-[50px] rounded-full pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#06B6D4]/10 blur-[50px] rounded-full pointer-events-none" />
+              
+              {menuItems.map((item, i) => {
+                const isActive = activeSection === item.toLowerCase();
+                return (
+                  <motion.a
+                    key={item}
+                    href={`#${item.toLowerCase()}`}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05, duration: 0.3, ease: "easeOut" }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(item);
+                    }}
+                    className={`relative flex items-center w-full px-4 py-2.5 rounded-xl text-base font-medium tracking-wide cursor-pointer transition-all duration-300 overflow-hidden group z-10 ${
+                      isActive 
+                        ? 'text-white bg-white/5 border border-white/10 shadow-[inset_0_0_20px_rgba(6,182,212,0.05)]' 
+                        : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
+                    }`}
+                  >
+                    {/* Subtle active indicator line */}
+                    <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-1/2 bg-gradient-to-b from-[#8B5CF6] to-[#06B6D4] rounded-r-md shadow-[0_0_10px_#06B6D4] transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
+                    
+                    <span className="relative z-10 ml-2">{item}</span>
+                  </motion.a>
+                );
+              })}
               
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: menuItems.length * 0.1 }}
-                className="pt-3 mt-1 border-t border-white/10"
+                className="pt-6 mt-4 border-t border-white/10 relative z-10"
               >
-                <a href="/Mohan_Teja_Doddi_Resume (Diamond).pdf" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] text-white text-sm font-medium rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.3)] active:scale-95 transition-all duration-300">
-                  <FileText size={16} />
+                <a 
+                  href="/Mohan_Teja_Doddi_Resume (Diamond).pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center justify-center w-full gap-2 px-6 py-3 bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] text-white font-medium rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.6)] hover:-translate-y-1 hover:scale-105 active:scale-95 transition-all duration-300 group"
+                >
+                  <FileText size={16} className="transition-transform duration-300 group-hover:-translate-y-0.5" />
                   <span>Resume</span>
                 </a>
               </motion.div>

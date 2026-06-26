@@ -39,7 +39,7 @@ const terminalStats = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="relative w-full pt-8 pb-10 md:py-0 sm:min-h-screen md:h-screen bg-[#050816] flex flex-col justify-center overflow-hidden">
+    <section id="skills" className="relative w-full pt-8 pb-10 md:pt-12 md:pb-16 lg:py-0 sm:min-h-screen md:min-h-0 lg:min-h-screen lg:h-screen bg-[#050816] flex flex-col justify-center overflow-hidden">
       <BackgroundEffects />
       
       <style>{`
@@ -70,7 +70,7 @@ const Skills = () => {
         }
       `}</style>
       
-      <div className="container relative z-10 mx-auto px-6 sm:px-8 flex flex-col md:-mt-32 lg:mt-0">
+      <div className="container relative z-10 mx-auto px-6 sm:px-8 flex flex-col">
         {/* Header Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -212,7 +212,7 @@ const Skills = () => {
         animate={{ opacity: 0.7, y: [0, 8, 0] }}
         transition={{ initial: { duration: 0.8, delay: 1.5 }, y: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
         whileHover={{ opacity: 1, scale: 1.1 }}
-        className="hidden sm:block absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
+        className="hidden sm:block absolute bottom-4 sm:bottom-8 md:bottom-[30px] lg:bottom-8 left-1/2 -translate-x-1/2 cursor-pointer z-50 text-slate-400 hover:text-[#06B6D4] transition-colors"
       >
         <ChevronDown size={32} />
       </motion.div>

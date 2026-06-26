@@ -34,7 +34,7 @@ const HeroVisual = () => {
 
   return (
     <div 
-      className="relative w-full max-w-[500px] aspect-square flex items-center justify-center scale-[0.45] sm:scale-75 md:scale-[0.60] lg:scale-100 transition-transform duration-500 origin-center -my-[130px] sm:-my-[60px] md:-my-[40px] lg:my-0"
+      className="relative w-full max-w-[500px] aspect-square flex items-center justify-center scale-[0.35] sm:scale-75 md:scale-[0.60] lg:scale-[0.70] xl:scale-[0.85] 2xl:scale-100 transition-transform duration-500 origin-center -my-[130px] sm:-my-[60px] md:-my-[40px] lg:my-0"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -102,10 +102,10 @@ const HeroVisual = () => {
         </div>
 
         {/* Orbiting Project Cards */}
-        <div className="hero-orbit-container absolute w-[420px] h-[420px] rounded-full border border-white/10 z-30 pointer-events-none">
+        <div className="hero-orbit-container absolute w-[360px] h-[360px] rounded-full border border-white/10 z-30 pointer-events-none">
           {PROJECTS.map((project, i) => {
             const angle = (i * 360) / PROJECTS.length;
-            const radius = 210; // Half of 420
+            const radius = 180; // Half of 360
             const x = Math.cos((angle * Math.PI) / 180) * radius;
             const y = Math.sin((angle * Math.PI) / 180) * radius;
             const Icon = project.icon;
@@ -146,19 +146,19 @@ const HeroVisual = () => {
                     href={project.url}
                     target={project.url !== "#" ? "_blank" : undefined}
                     rel="noopener noreferrer"
-                    className="group relative flex items-center gap-3 p-3 rounded-2xl border border-white/10 bg-[#050816]/80 backdrop-blur-xl shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:bg-white/10 hover:border-[#06B6D4]/50 transition-all duration-300 w-48 hover:w-56 overflow-hidden cursor-pointer block"
+                    className="group relative flex items-center gap-2 p-2.5 rounded-[14px] border border-white/10 bg-[#050816]/80 backdrop-blur-xl shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:bg-white/10 hover:border-[#06B6D4]/50 transition-all duration-300 w-44 overflow-hidden cursor-pointer block"
                   >
                     <div className="absolute -inset-4 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]" />
                     
-                    <div className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: `${project.color}20` }}>
-                      <Icon size={20} color={project.color} />
+                    <div className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${project.color}20` }}>
+                      <Icon size={16} color={project.color} />
                     </div>
                     
                     <div className="flex flex-col flex-1 overflow-hidden">
-                      <span className="text-white text-xs font-semibold truncate group-hover:text-clip">{project.title}</span>
-                      <span className="text-slate-400 text-[10px] truncate">{project.desc}</span>
+                      <span className="text-white text-[11px] font-semibold truncate group-hover:text-clip">{project.title}</span>
+                      <span className="text-slate-400 text-[9px] truncate">{project.desc}</span>
                       <div className="flex items-center gap-1 font-medium mt-0.5 opacity-0 h-0 group-hover:opacity-100 group-hover:h-auto transition-all duration-300" style={{ color: project.color }}>
-                        <span className="text-[10px] font-bold">Click to open</span>
+                        <span className="text-[9px] font-bold">Click to open</span>
                         <ExternalLink className="w-2.5 h-2.5" />
                       </div>
                     </div>
@@ -171,7 +171,7 @@ const HeroVisual = () => {
         </div>
         
         {/* Decorative inner orbit */}
-        <div className="hero-orbit-item absolute w-[300px] h-[300px] rounded-full border border-dashed border-[#06B6D4]/30 pointer-events-none" />
+        <div className="hero-orbit-item absolute w-[280px] h-[280px] rounded-full border border-dashed border-[#06B6D4]/30 pointer-events-none" />
       </motion.div>
     </div>
   );
