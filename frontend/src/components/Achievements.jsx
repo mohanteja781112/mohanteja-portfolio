@@ -156,9 +156,9 @@ const milestones = [
 
 const metrics = [
   { label: "Hackathon Awards", value: "2", icon: Trophy },
-  { label: "Open Source Programs", value: "1", icon: Star },
+  { label: "Open Source Program", value: "1", icon: Star },
   { label: "Leadership Roles", value: "1", icon: User },
-  { label: "Teams Competed Against", value: "100+", icon: Users }
+  { label: "Pull Requests", value: "10+", icon: Users }
 ];
 
 const constellationNodes = [

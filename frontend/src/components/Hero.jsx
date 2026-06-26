@@ -128,10 +128,10 @@ const Hero = () => {
                 Full Stack Developer
               </div>
               <div className="backdrop-blur-md bg-[#050816]/80 border border-white/10 px-2 sm:px-4 lg:px-5 py-1 sm:py-2 lg:py-2.5 rounded-lg sm:rounded-xl lg:rounded-2xl shadow-[0_0_30px_rgba(6,182,212,0.15)] text-[6.5px] sm:text-[8.5px] lg:text-[10px] xl:text-xs font-bold tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] text-slate-300 uppercase ml-2 sm:ml-6 lg:ml-8 transition-transform hover:scale-105 pointer-events-auto">
-                AI Engineer
+                AI & ML Engineer
               </div>
               <div className="backdrop-blur-md bg-[#050816]/80 border border-white/10 px-2 sm:px-4 lg:px-5 py-1 sm:py-2 lg:py-2.5 rounded-lg sm:rounded-xl lg:rounded-2xl shadow-[0_0_30px_rgba(139,92,246,0.15)] text-[6.5px] sm:text-[8.5px] lg:text-[10px] xl:text-xs font-bold tracking-[0.1em] sm:tracking-[0.15em] lg:tracking-[0.2em] text-slate-300 uppercase ml-4 sm:ml-12 lg:ml-16 transition-transform hover:scale-105 pointer-events-auto">
-                Problem Solver
+                Competitive Programmer
               </div>
             </motion.div>
 

@@ -86,6 +86,12 @@ const BackgroundEffects = () => {
     };
 
     const animate = () => {
+      if (numParticles === 0) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Do not request next frame if no particles, saving massive CPU/battery on mobile
+        return;
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       particles.forEach(p => {
@@ -97,19 +103,22 @@ const BackgroundEffects = () => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    // Only start loop if particles exist
+    if (numParticles > 0) {
+      animate();
+    }
 
     return () => {
       resizeObserver.disconnect();
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <div className="absolute inset-0 bg-[#050816]" />
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#8B5CF6]/15 blur-[60px] lg:blur-[120px] rounded-full" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#06B6D4]/10 blur-[60px] lg:blur-[120px] rounded-full" />
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#8B5CF6]/15 blur-[40px] md:blur-[80px] lg:blur-[120px] rounded-full will-change-transform" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#06B6D4]/10 blur-[40px] md:blur-[80px] lg:blur-[120px] rounded-full will-change-transform" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
       <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-40 pointer-events-none hidden xl:block" />
     </div>

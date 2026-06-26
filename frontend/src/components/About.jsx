@@ -229,15 +229,7 @@ const About = () => {
     <section id="about" className="relative w-full min-h-[100dvh] flex items-center py-20 lg:py-0 px-4 sm:px-8 bg-[#050816] overflow-hidden">
       <BackgroundEffects />
       
-      {/* HUGE BACKGROUND TEXT */}
-      <motion.div 
-        style={{ y }}
-        className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden"
-      >
-        <h1 className="text-[6rem] sm:text-[10rem] md:text-[14rem] lg:text-[20rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-white/[0.03] to-transparent select-none tracking-tighter mix-blend-screen whitespace-nowrap">
-          KNOW ME
-        </h1>
-      </motion.div>
+
 
       <div className="container mx-auto relative z-10 max-w-6xl w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-6 xl:gap-8 items-stretch h-full">

@@ -62,9 +62,9 @@ const HeroVisual = () => {
         }
       `}</style>
 
-      {/* Mouse Follow Glow */}
+      {/* Mouse Follow Glow - Hidden on mobile to save CPU */}
       <motion.div 
-        className="absolute w-64 h-64 bg-[#06B6D4]/20 rounded-full blur-[80px] pointer-events-none"
+        className="hidden md:block absolute w-64 h-64 bg-[#06B6D4]/20 rounded-full blur-[80px] pointer-events-none"
         style={{ x: mouseX, y: mouseY }}
         transition={{ type: "spring", bounce: 0, duration: 0.4 }}
       />
@@ -84,10 +84,10 @@ const HeroVisual = () => {
             <motion.div animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} className="absolute w-[260px] h-[260px] rounded-full border border-dashed border-[#8B5CF6]/40 pointer-events-none" />
             <motion.div animate={{ rotate: -360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }} className="absolute w-[300px] h-[300px] rounded-full border border-white/10 border-t-[#06B6D4]/50 border-b-[#8B5CF6]/50 pointer-events-none" />
             
-            <div className="absolute inset-[-20px] rounded-full border border-white/5 bg-white/5 backdrop-blur-sm pointer-events-none" />
-            <div className="absolute inset-[-40px] rounded-full border border-[#8B5CF6]/20 bg-[#8B5CF6]/5 backdrop-blur-md pointer-events-none" />
+            <div className="absolute inset-[-20px] rounded-full border border-white/5 bg-white/5 md:backdrop-blur-sm pointer-events-none" />
+            <div className="absolute inset-[-40px] rounded-full border border-[#8B5CF6]/20 bg-[#8B5CF6]/5 md:backdrop-blur-md pointer-events-none" />
             {/* The Thick Soft Glow */}
-            <div className="absolute inset-[-4px] rounded-full bg-gradient-to-tr from-[#06B6D4] to-[#8B5CF6] opacity-80 blur-[12px] pointer-events-none" />
+            <div className="absolute inset-[-4px] rounded-full bg-gradient-to-tr from-[#06B6D4] to-[#8B5CF6] opacity-60 md:opacity-80 blur-[8px] md:blur-[12px] pointer-events-none will-change-transform" />
             
             <div className="relative z-10 w-40 h-40 rounded-full shadow-[0_0_30px_rgba(6,182,212,0.5)]">
               <div className="w-full h-full rounded-full overflow-hidden bg-[#050816]">
